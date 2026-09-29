@@ -1,0 +1,7 @@
+"hello\nworld"
+"hello\rworld"
+"hello\tworld"
+"hello\bworld"
+"backslash: \\"
+"single quote: \'"
+"double quote: \""

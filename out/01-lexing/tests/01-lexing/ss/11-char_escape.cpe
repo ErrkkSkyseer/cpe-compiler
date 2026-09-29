@@ -1,0 +1,8 @@
+Char('\n')
+Char('\r')
+Char('\t')
+Char('\b')
+Char('\\')
+Char('\'')
+Char('"')
+EOF
