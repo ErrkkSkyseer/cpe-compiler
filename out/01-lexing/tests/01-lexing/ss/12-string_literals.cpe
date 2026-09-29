@@ -1,0 +1,7 @@
+String("hello")
+String("hello world")
+String("12345")
+String("hello_world")
+String("abc DEF 123")
+String("")
+EOF

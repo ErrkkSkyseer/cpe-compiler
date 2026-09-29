@@ -1,0 +1,8 @@
+String("hello\nworld")
+String("hello\rworld")
+String("hello\tworld")
+String("hello\bworld")
+String("backslash: \\")
+String("single quote: '")
+String("double quote: \"")
+EOF

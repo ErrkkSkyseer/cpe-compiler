@@ -1,0 +1,9 @@
+Name(Integer)
+Name(Bool)
+Name(String)
+Name(Tree)
+Name(Leaf)
+Name(Node)
+Name(MyType)
+Name(SomeConstructor)
+EOF

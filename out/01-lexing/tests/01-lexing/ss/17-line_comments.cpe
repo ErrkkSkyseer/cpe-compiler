@@ -1,0 +1,6 @@
+Int(1)
+Sym(+)
+Int(2)
+Var(x)
+Var(y)
+EOF
