@@ -1,0 +1,13 @@
+(() (
+(data Color (Red Green Blue))
+(data (Tree a) (Leaf (Node a (Tree a) (Tree a))))
+(data IntList (EmptyIntList (ConsIntList Integer IntList)))
+(data (List a) (Empty (Cons a (List a))))
+(data (Either a b) ((Left a) (Right b)))
+(data (Logged a) ((Log String a)))
+(data (Box a) ((Box a)))
+(data Even (Zero (ESucc Odd)))
+(data Odd ((OSucc Even)))
+(data (Fn a b) ((Fn (-> a b))))
+(data Wrap ((Wrap ([] Integer) (, ([] Char) Bool))))
+(data Unit2 ((U ())))))

@@ -1,0 +1,33 @@
+def m1 : T = match xs with | [] -> 0 | hd::tl -> 1
+def m2 : T = match x with | _ -> 0
+def m3 : T = match l with | [] -> True | x1::x2::xs -> x1 == x2 | hd::tl -> False
+def m4 : T = match p with | (a, b) -> a + b
+def m5 : T = match p with | (a, (b, c)) -> c
+def m6 : T = match t with | Leaf -> 0 | Node v l r -> v
+def m7 : T = match t with | Node v (Node w _ _) Leaf -> w | _ -> 0
+def m8 : T = match b with | True -> 1 | False -> 0
+def m9 : T = match n with | 0 -> "zero" | 1 -> "one" | _ -> "many"
+def m10 : T = match c with | 'a' -> 1 | '\n' -> 2 | _ -> 3
+def m11 : T = match s with | "" -> [] | s -> s
+def m12 : T = match u with | () -> 0
+def m13 : T = match xs with | a::b::[] -> a + b | _ -> 0
+def m14 : T = match xs with | (hd::tl) -> hd
+def m15 : T = match (a, b) with | (True, True) -> True | _ -> False
+def m16 : T = match f x with | Left a -> a | Right b -> b
+def m17 : T = match xs with | [] -> if a then b else c | _ -> d
+def m18 : T = match xs with | Cons h t -> h
+def m19 : T = match xs with | Just (x::rest) -> x | Nothing -> 0
+def m20 : T = match xs with | (Just x)::rest -> x | _ -> 0
+def m21 : T = match p with | Pair (a, b) c -> a
+
+# nested match as the LAST case (as in sort.cpe)
+def n1 : T = match a with | x -> match b with | y -> x + y
+
+# nested match in a non-last case needs parentheses
+def n2 : T = match a with | Just x -> (match x with | 0 -> 1 | _ -> 2) | Nothing -> 3
+
+# without parentheses the inner match takes every following case (like OCaml)
+def n3 : T = match a with | Just x -> match x with | 0 -> 1 | _ -> 2 | Nothing -> 3
+
+# match inside if
+def n4 : T = if a then match b with | _ -> 1 else 2

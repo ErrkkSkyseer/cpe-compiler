@@ -1,0 +1,102 @@
+
+** Conflict (shift/reduce) in state 42.
+** Token involved: RPAREN
+** This state is reached from start after reading:
+
+LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr LPAREN LET LPAREN LPAREN IDENT LPAREN
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+start 
+prog EOF 
+list(defn) 
+defn list(defn) 
+LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr RPAREN 
+                                                             LPAREN LET LPAREN list(letbinding) RPAREN expr RPAREN 
+                                                                               letbinding list(letbinding) 
+                                                                               (?)
+
+** In state 42, looking ahead at RPAREN, shifting is permitted
+** because of the following sub-derivation:
+
+LPAREN IDENT expr RPAREN 
+             LPAREN . RPAREN 
+
+** In state 42, looking ahead at RPAREN, reducing production
+** list(param) ->
+** is permitted because of the following sub-derivation:
+
+LPAREN IDENT LPAREN list(param) RPAREN typeexpr expr RPAREN // lookahead token appears
+                    . 
+
+** Conflict (reduce/reduce) in state 44.
+** Tokens involved: RPAREN LPAREN
+** The following explanations concentrate on token RPAREN.
+** This state is reached from start after reading:
+
+LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr LPAREN LET LPAREN LPAREN IDENT LPAREN LPAREN RPAREN
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+start 
+prog EOF 
+list(defn) 
+defn list(defn) 
+LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr RPAREN 
+                                                             LPAREN LET LPAREN list(letbinding) RPAREN expr RPAREN 
+                                                                               letbinding list(letbinding) 
+                                                                               (?)
+
+** In state 44, looking ahead at RPAREN, reducing production
+** expr -> LPAREN RPAREN
+** is permitted because of the following sub-derivation:
+
+LPAREN IDENT expr RPAREN 
+             LPAREN expr RPAREN // lookahead token appears
+                    LPAREN RPAREN . 
+
+** In state 44, looking ahead at RPAREN, reducing production
+** param -> LPAREN RPAREN
+** is permitted because of the following sub-derivation:
+
+LPAREN IDENT LPAREN list(param) RPAREN typeexpr expr RPAREN // lookahead token appears
+                    param list(param) // lookahead token is inherited because list(param) can vanish
+                    LPAREN RPAREN . 
+
+** Conflict (shift/reduce) in state 83.
+** Tokens involved: LPAREN IDENT
+** The following explanations concentrate on token LPAREN.
+** This state is reached from start after reading:
+
+LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr LPAREN LET LPAREN LPAREN IDENT LPAREN LPAREN IDENT
+
+** The derivations that appear below have the following common factor:
+** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
+
+start 
+prog EOF 
+list(defn) 
+defn list(defn) 
+LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr RPAREN 
+                                                             LPAREN LET LPAREN list(letbinding) RPAREN expr RPAREN 
+                                                                               letbinding list(letbinding) 
+                                                                               (?)
+
+** In state 83, looking ahead at LPAREN, reducing production
+** expr -> IDENT
+** is permitted because of the following sub-derivation:
+
+LPAREN IDENT expr RPAREN 
+             LPAREN expr expr RPAREN 
+                    LPAREN expr expr RPAREN // lookahead token appears because expr can begin with LPAREN
+                           IDENT . 
+
+** In state 83, looking ahead at LPAREN, shifting is permitted
+** because of the following sub-derivation:
+
+LPAREN IDENT LPAREN list(param) RPAREN typeexpr expr RPAREN 
+                    param list(param) 
+                    LPAREN IDENT typeexpr RPAREN 
+                                 . LPAREN LBRACKET RBRACKET typeexpr RPAREN 

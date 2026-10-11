@@ -1,0 +1,14 @@
+def t06 : T = a :: b :: c
+def t07 : T = a ++ b ++ c
+def t08 : T = a :: b ++ c
+def t09 : T = a ++ b :: c
+def t10 : T = a + b :: c + d
+def t38 : T = map f xs ++ ys
+def t39 : T = x :: f y :: z
+def t40 : T = 1 - 2 :: xs
+def p1 : T = x :: []
+def p2 : T = "261" :: "406" :: []
+def p3 : T = [] ++ []
+def p4 : T = (x :: xs) ++ ys
+def p5 : T = inorder l ++ v::[] ++ inorder r
+def p6 : T = v :: preorder l ++ preorder r

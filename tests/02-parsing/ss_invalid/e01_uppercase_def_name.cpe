@@ -1,0 +1,1 @@
+def Foo (x : Integer) : Integer = x

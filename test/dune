@@ -7,3 +7,8 @@
  (modules a3_test)
  (name a3_test)
  (libraries ounit2 cpecmuCompiler))
+
+(executable
+ (name run_parser_tests)
+ (modules run_parser_tests)
+ (libraries cpecmuCompiler))

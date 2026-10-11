@@ -1,0 +1,12 @@
+(() (
+(def t12 () T (&& (< a b) (> c d)))
+(def t13 () T (|| a (&& b c)))
+(def t14 () T (|| (&& a b) c))
+(def t15 () T (|| a (|| b c)))
+(def t16 () T (&& a (&& b c)))
+(def t32 () T (|| (!= a b) (&& (<= c d) (>= e f))))
+(def b1 () T (&& True False))
+(def b2 () T (|| a (&& b c)))
+(def b3 () T (&& (|| a b) c))
+(def b4 () T (&& (not a) (not b)))
+(def b5 () T (if a True False))))
