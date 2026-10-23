@@ -45,7 +45,7 @@ let bin loc op l r = BinExpr { prop = (); pos = loc; op; left = l; right = r }
 
 start:
   | imports = list(import); defns = list(defn); EOF
-    { { prog_pos = $loc; imports; defns } }
+    { {imports; defns } }
 
 import:
   | "import"; n = IDENT                  { { imp_pos = $loc; imp_name = n; namespace = None } }
