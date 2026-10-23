@@ -2,38 +2,38 @@ type pos = Lexing.position * Lexing.position
 
 (* ---------------- type expressions ---------------- *)
 type typeexpr =
-  | TypeVar of { 
+  | TypeVar of { (*a*)
       pos : pos; 
       name : string 
     }
-  | ListType of { 
+  | ListType of { (*[a]*)
       pos : pos; 
       elem : typeexpr 
     }
-  | PairType of { 
+  | PairType of { (*(a,b)*)
       pos : pos; 
       left : typeexpr; 
       right : typeexpr 
     }
-  | FuncType of { 
+  | FuncType of { (* a -> b*)
       pos : pos; 
       arg : typeexpr; 
       ret : typeexpr 
     }
-  | TypeApp of { 
+  | TypeApp of { (*a b*)
       pos : pos; 
       func : typeexpr; 
       arg : typeexpr 
     }
 
 (* ---------------- parameters ---------------- *)
-type param =
-  | UnitParam of { pos : pos }
+type param = 
+  | UnitParam of {pos : pos} 
   | Param of { 
-      pos : pos; 
-      name : string; 
-      ty : typeexpr 
-    }
+    pos : pos; 
+    name : string; 
+    ty : typeexpr 
+  }
 
 (* ---------------- operators ---------------- *)
 type unop = Neg
@@ -73,6 +73,7 @@ type pattern =
 
 (* ---------------- expressions ---------------- *)
 type 't expr =
+  (* atom - literals *)
   | IntLit of { 
       prop : 't; 
       pos : pos; 
@@ -106,22 +107,28 @@ type 't expr =
       prop : 't; 
       pos : pos 
     }
+
+  (* Identifier *)
   | Var of { 
       prop : 't; 
       pos : pos; 
       name : string 
     }
+    
+  (* pair *)
   | PairExpr of { 
       prop : 't; 
       pos : pos; 
       left : 't expr; 
       right : 't expr }
+  (* function application? *)
   | App of { 
       prop : 't; 
       pos : pos; 
       func : 't expr; 
       arg : 't expr 
     }
+  (* binary operator *)
   | BinExpr of { 
       prop : 't; 
       pos : pos; 
@@ -129,12 +136,14 @@ type 't expr =
       left : 't expr; 
       right : 't expr 
     }
+  (* unary operator *)
   | UnaryExpr of { 
       prop : 't; 
       pos : pos; 
       op : unop; 
       expr : 't expr 
     }
+  (* If *)
   | IfExpr of { 
       prop : 't; 
       pos : pos; 
@@ -142,12 +151,14 @@ type 't expr =
       then_expr : 't expr; 
       else_expr : 't expr 
     }
+  (* Let *)
   | LetExpr of { 
       prop : 't; 
       pos : pos; 
       bindings : 't letbinding list; 
       body : 't expr 
     }
+  (* Lambda *)
   | Lambda of { 
       prop : 't; 
       pos : pos; 
@@ -155,6 +166,7 @@ type 't expr =
       return_type : typeexpr; 
       body : 't expr 
     }
+  (* Pattern Matching *)
   | MatchExpr of { 
       prop : 't; 
       pos : pos; 
@@ -183,6 +195,7 @@ and 't case = {
 }
 
 (* ---------------- top level ---------------- *)
+(* data's node children *)
 type typedecl = { 
   td_name : string; 
   td_params : string list 
@@ -193,6 +206,7 @@ type constructor = {
   con_args : typeexpr list 
 }
 
+(* definition block *)
 type 't defn =
   | Def of { 
       pos : pos; 
@@ -212,14 +226,15 @@ type 't defn =
       body : typeexpr 
     }
 
+(* import block *)
 type import = { 
   imp_pos : pos; 
   imp_name : string; 
   namespace : string option 
 }
 
+(* Root *)
 type 't prog = { 
-  prog_pos : pos; 
   imports : import list; 
   defns : 't defn list 
 }
