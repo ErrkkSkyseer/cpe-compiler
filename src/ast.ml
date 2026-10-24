@@ -2,25 +2,61 @@ type pos = Lexing.position * Lexing.position
 
 (* ---------------- type expressions ---------------- *)
 type typeexpr =
-  | TypeVar of { pos : pos; name : string }
-  | ListType of { pos : pos; elem : typeexpr }
-  | PairType of { pos : pos; left : typeexpr; right : typeexpr }
-  | FuncType of { pos : pos; arg : typeexpr; ret : typeexpr }
-  | TypeApp of { pos : pos; func : typeexpr; arg : typeexpr }
+  | TypeVar of { (*a*)
+      pos : pos; 
+      name : string 
+    }
+  | ListType of { (*[a]*)
+      pos : pos; 
+      elem : typeexpr 
+    }
+  | PairType of { (*(a,b)*)
+      pos : pos; 
+      left : typeexpr; 
+      right : typeexpr 
+    }
+  | FuncType of { (* a -> b*)
+      pos : pos; 
+      arg : typeexpr; 
+      ret : typeexpr 
+    }
+  | TypeApp of { (*a b*)
+      pos : pos; 
+      func : typeexpr; 
+      arg : typeexpr 
+    }
 
 (* ---------------- parameters ---------------- *)
-type param =
-  | UnitParam of { pos : pos }
-  | Param of { pos : pos; name : string; ty : typeexpr }
+type param = 
+  | UnitParam of {pos : pos} 
+  | Param of { 
+    pos : pos; 
+    name : string; 
+    ty : typeexpr 
+  }
 
 (* ---------------- operators ---------------- *)
 type unop = Neg
 
 type op =
-  | Add | Sub | Mult | Div | IDiv | Mod
-  | LOr | LAnd
-  | Eq | Neq | Lt | Gt | Le | Ge
-  | Cons | Append | Compose | Apply
+  | Add 
+  | Sub 
+  | Mult 
+  | Div 
+  | IDiv 
+  | Mod
+  | LOr 
+  | LAnd
+  | Eq 
+  | Neq 
+  | Lt 
+  | Gt 
+  | Le 
+  | Ge
+  | Cons 
+  | Append 
+  | Compose 
+  | Apply
 
 (* ---------------- patterns ---------------- *)
 type pattern =
@@ -37,45 +73,171 @@ type pattern =
 
 (* ---------------- expressions ---------------- *)
 type 't expr =
-  | IntLit of { prop : 't; pos : pos; value : int }
-  | BoolLit of { prop : 't; pos : pos; value : bool }
-  | FloatLit of { prop : 't; pos : pos; value : float }
-  | CharLit of { prop : 't; pos : pos; value : char }
-  | StringLit of { prop : 't; pos : pos; value : string }
-  | UnitLit of { prop : 't; pos : pos }
-  | EmptyListLit of { prop : 't; pos : pos }
-  | Var of { prop : 't; pos : pos; name : string }
-  | PairExpr of { prop : 't; pos : pos; left : 't expr; right : 't expr }
-  | App of { prop : 't; pos : pos; func : 't expr; arg : 't expr }
-  | BinExpr of { prop : 't; pos : pos; op : op; left : 't expr; right : 't expr }
-  | UnaryExpr of { prop : 't; pos : pos; op : unop; expr : 't expr }
-  | IfExpr of { prop : 't; pos : pos; cond : 't expr;
-                then_expr : 't expr; else_expr : 't expr }
-  | LetExpr of { prop : 't; pos : pos; bindings : 't letbinding list; body : 't expr }
-  | Lambda of { prop : 't; pos : pos; params : param list;
-                return_type : typeexpr; body : 't expr }
-  | MatchExpr of { prop : 't; pos : pos; scrutinee : 't expr; cases : 't case list }
+  (* atom - literals *)
+  | IntLit of { 
+      prop : 't; 
+      pos : pos; 
+      value : int 
+    }
+  | BoolLit of { 
+      prop : 't; 
+      pos : pos; 
+      value : bool 
+    }
+  | FloatLit of { 
+      prop : 't; 
+      pos : pos; 
+      value : float 
+    }
+  | CharLit of { 
+      prop : 't; 
+      pos : pos; 
+      value : char 
+    }
+  | StringLit of { 
+      prop : 't; 
+      pos : pos; 
+      value : string 
+    }
+  | UnitLit of { 
+      prop : 't; 
+      pos : pos 
+    }
+  | EmptyListLit of { 
+      prop : 't; 
+      pos : pos 
+    }
+
+  (* Identifier *)
+  | Var of { 
+      prop : 't; 
+      pos : pos; 
+      name : string 
+    }
+    
+  (* pair *)
+  | PairExpr of { 
+      prop : 't; 
+      pos : pos; 
+      left : 't expr; 
+      right : 't expr }
+  (* function application? *)
+  | App of { 
+      prop : 't; 
+      pos : pos; 
+      func : 't expr; 
+      arg : 't expr 
+    }
+  (* binary operator *)
+  | BinExpr of { 
+      prop : 't; 
+      pos : pos; 
+      op : op; 
+      left : 't expr; 
+      right : 't expr 
+    }
+  (* unary operator *)
+  | UnaryExpr of { 
+      prop : 't; 
+      pos : pos; 
+      op : unop; 
+      expr : 't expr 
+    }
+  (* If *)
+  | IfExpr of { 
+      prop : 't; 
+      pos : pos; 
+      cond : 't expr;
+      then_expr : 't expr; 
+      else_expr : 't expr 
+    }
+  (* Let *)
+  | LetExpr of { 
+      prop : 't; 
+      pos : pos; 
+      bindings : 't letbinding list; 
+      body : 't expr 
+    }
+  (* Lambda *)
+  | Lambda of { 
+      prop : 't; 
+      pos : pos; 
+      params : param list;
+      return_type : typeexpr; 
+      body : 't expr 
+    }
+  (* Pattern Matching *)
+  | MatchExpr of { 
+      prop : 't; 
+      pos : pos; 
+      scrutinee : 't expr; 
+      cases : 't case list 
+    }
 
 and 't letbinding =
-  | LetValue of { pos : pos; name : string; value : 't expr }
-  | LetFunction of { pos : pos; name : string; params : param list;
-                     return_type : typeexpr; body : 't expr }
+  | LetValue of { 
+      pos : pos; 
+      name : string; 
+      value : 't expr 
+    }
+  | LetFunction of { 
+      pos : pos; 
+      name : string; 
+      params : param list;
+      return_type : typeexpr; 
+      body : 't expr 
+    }
 
-and 't case = { case_pos : pos; ptrn : pattern; case_body : 't expr }
+and 't case = { 
+  case_pos : pos; 
+  ptrn : pattern; 
+  case_body : 't expr 
+}
 
 (* ---------------- top level ---------------- *)
-type typedecl = { td_name : string; td_params : string list }
-type constructor = { con_name : string; con_args : typeexpr list }
+(* data's node children *)
+type typedecl = { 
+  td_name : string; 
+  td_params : string list 
+}
 
+type constructor = { 
+  con_name : string; 
+  con_args : typeexpr list 
+}
+
+(* definition block *)
 type 't defn =
-  | Def of { pos : pos; name : string; params : param list;
-             return_type : typeexpr; body : 't expr }
-  | Data of { pos : pos; decl : typedecl; constructors : constructor list }
-  | TypeSyn of { pos : pos; decl : typedecl; body : typeexpr }
+  | Def of { 
+      pos : pos; 
+      name : string; 
+      params : param list;
+      return_type : typeexpr; 
+      body : 't expr 
+    }
+  | Data of { 
+      pos : pos; 
+      decl : typedecl; 
+      constructors : constructor list 
+    }
+  | TypeSyn of { 
+      pos : pos; 
+      decl : typedecl; 
+      body : typeexpr 
+    }
 
-type import = { imp_pos : pos; imp_name : string; namespace : string option }
+(* import block *)
+type import = { 
+  imp_pos : pos; 
+  imp_name : string; 
+  namespace : string option 
+}
 
-type 't prog = { prog_pos : pos; imports : import list; defns : 't defn list }
+(* Root *)
+type 't prog = { 
+  imports : import list; 
+  defns : 't defn list 
+}
 
 let prop_of_expr (e : 't expr) : 't = match e with
   | IntLit r -> r.prop | BoolLit r -> r.prop | FloatLit r -> r.prop
