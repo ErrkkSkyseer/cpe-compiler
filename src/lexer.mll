@@ -4,10 +4,12 @@ exception SyntaxError of string * Lexing.position
 let error msg lexbuf = raise (SyntaxError (msg, Lexing.lexeme_start_p lexbuf))
 
 let keywords = Hashtbl.create 16
-let () = List.iter (fun (k, t) -> Hashtbl.add keywords k t)
+(* let () = List.iter (fun (k, t) -> Hashtbl.add keywords k t)
   [ "def", DEF; "import", IMPORT; "as", AS; "data", DATA; "type", TYPE;
     "match", MATCH; "with", WITH; "let", LET; "and", AND; "in", IN;
-    "if", IF; "then", THEN; "else", ELSE ]
+    "if", IF; "then", THEN; "else", ELSE ] *)
+let () = List.iter (fun (k, t) -> Hashtbl.add keywords k t)
+  [ "if", IF; "then", THEN; "else", ELSE ]
 
 let int_lit s lexbuf =
   match int_of_string_opt s with
@@ -39,19 +41,25 @@ rule read = parse
   | lident '!' lident as s { IDENT s }            (* namespace!name *)
   | lident as s            { match Hashtbl.find_opt keywords s with
                              | Some t -> t | None -> IDENT s }
-  | uident as s            { UIDENT s }
-  | '_'                    { UNDERSCORE }
+  (* | uident as s            { UIDENT s } *)
+  | uident as s            { IDENT s }
+  (* | '_'                    { UNDERSCORE } *)
   | '\'' ([^ '\\' '\'' '\n'] as c) '\''         { CHAR_LIT c }
   | '\'' '\\' (_ as c) '\''                      { CHAR_LIT (unescape lexbuf c) }
   | '"'                    { string (Buffer.create 16) lexbuf }
-  | "->" { ARROW } | "=>" { FATARROW }
+  (* | "->" { ARROW } | "=>" { FATARROW } *)
   | "==" { EQ } | "!=" { NEQ } | "<=" { LE } | ">=" { GE }
-  | "<" { LT } | ">" { GT } | "=" { ASSIGN }
+  | "<" { LT } | ">" { GT } 
+  (* | "=" { ASSIGN } *)
   | "&&" { ANDAND } | "||" { OROR }
-  | "::" { CONS } | ":" { COLON } | "++" { APPEND }
+  | "::" { CONS } 
+  (* | ":" { COLON }  *)
+  | "++" { APPEND }
   | "+" { PLUS } | "-" { MINUS } | "*" { TIMES }
   | "//" { IDIV } | "/" { DIV } | "%" { MOD }
-  | "." { DOT } | "$" { DOLLAR } | "\\" { BACKSLASH } | "|" { BAR }
+  | "." { DOT } | "$" { DOLLAR } 
+  (* | "\\" { BACKSLASH } 
+  | "|" { BAR } *)
   | "," { COMMA } | "(" { LPAREN } | ")" { RPAREN }
   | "[" { LBRACKET } | "]" { RBRACKET }
   | eof                    { EOF }

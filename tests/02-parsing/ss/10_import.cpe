@@ -1,5 +1,0 @@
-import pervasives
-import utils as u
-import sort as s2
-import my_file2 as ns_1
-def main (arg : [String]) : String = u!showIntList (s2!sort (u!parseIntList arg))

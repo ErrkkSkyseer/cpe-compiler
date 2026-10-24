@@ -1,7 +1,0 @@
-(() (
-(def isEven ((x Integer)) Bool (if (== x 0) True (if (< x 0) (isEven (- x)) (isOdd (- x 1)))))
-(def isOdd ((x Integer)) Bool (if (== x 0) False (if (< x 0) (isOdd (- x)) (isEven (- x 1)))))
-(def hofstadter ((n Integer)) (, Integer Integer) (let ((f ((n Integer)) Integer (if (== n 0) 1 (- n (m (f (- n 1)))))) (m ((n Integer)) Integer (if (== n 0) 0 (- n (f (m (- n 1))))))) (, (f n) (m n))))
-(def bot (()) Integer (let ((forever ((x Integer)) Integer (forever x))) (forever 42)))
-(def fib ((n Integer)) Integer (if (< n 2) n (+ (fib (- n 1)) (fib (- n 2)))))
-(def useFib () Integer (fib (+ 2 3)))))

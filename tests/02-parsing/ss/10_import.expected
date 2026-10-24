@@ -1,6 +1,0 @@
-((
-(import pervasives)
-(import utils u)
-(import sort s2)
-(import my_file2 ns_1)) (
-(def main ((arg ([] String))) String (u!showIntList (s2!sort (u!parseIntList arg))))))
