@@ -106,7 +106,12 @@ open Ast
 
 (** rules section **)
 start:
+<<<<<<< HEAD
   | prog = prog; EOF { prog }
+=======
+  | imports = list(import); defns = list(defn); EOF
+    { {imports; defns } }
+>>>>>>> 00a08f4211328f208c7757c1a39c2abcddcbf62c
 
 prog:
   | e = expr
