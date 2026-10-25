@@ -112,7 +112,6 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
         )
       | _ -> None
     )
-
   | BinExpr ({op = IDiv; _} as r)
   -> (match (typecheck_expr r.left, typecheck_expr r.right) with
       | (Some left', Some right') -> (
@@ -125,7 +124,6 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
         )
       | _ -> None
     )
-
   | BinExpr ({op = Div; _} as r) 
   -> (match (typecheck_expr r.left, typecheck_expr r.right) with
       | (Some left', Some right') -> (
@@ -138,7 +136,6 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
         )
       | _ -> None
     )
-
   | BinExpr ({op = Mod; _} as r) 
   -> (match (typecheck_expr r.left, typecheck_expr r.right) with
       | (Some left', Some right') -> (
@@ -173,7 +170,9 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
   -> (match (typecheck_expr r.left, typecheck_expr r.right) with
       | (Some left', Some right') -> (
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
-        if tl == tr 
+        match (tl,tr) with
+        | (Int | Float), (Int | Float) -> mk_binop_expr Bool r.pos r.op left' right'
+        | _ -> if tl == tr 
           then mk_binop_expr Bool r.pos r.op left' right'
           else (prerr_string (string_of_positions r.pos 
             ^ ": expected same type but got "
