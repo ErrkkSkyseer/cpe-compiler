@@ -99,9 +99,8 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
           match (tl, tr) with
           (* Both is Int --> Int *)
-          | (Int, Int) -> 
+          | Int, Int -> 
             mk_binop_expr Int r.pos r.op left' right'
-          (* Either one is Float --> Float, 3 cases *)
           | (Int | Float), (Int | Float) -> 
             mk_binop_expr Float r.pos r.op left' right'
           (* Wrong Type *)
