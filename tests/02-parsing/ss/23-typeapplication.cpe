@@ -1,0 +1,5 @@
+# ---- type application ----
+[app-simple]             type: Tree a ==> (Tree a)
+[app-left-assoc]         type: Map s s ==> ((Map s) s)
+[app-tighter-than-arrow] type: Tree a -> [a] ==> (-> (Tree a) ([] a))
+[app-mixed-nested]       type: Either a b -> Logged [a] ==> (-> ((Either a) b) (Logged ([] a)))

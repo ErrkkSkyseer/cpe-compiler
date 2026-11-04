@@ -1,0 +1,4 @@
+# ---- lists ----
+[list-simple]            type: [a] ==> ([] a)
+[list-nested]            type: [[a]] ==> ([] ([] a))
+[list-of-named]          type: [Char] ==> ([] Char)

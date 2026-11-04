@@ -1,0 +1,2 @@
+# ---- pairs ----
+[pair-simple]            type: (a, b) ==> (, a b)

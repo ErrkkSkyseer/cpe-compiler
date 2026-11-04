@@ -1,0 +1,5 @@
+# ---- function arrows ----
+[func-simple]            type: a -> b ==> (-> a b)
+[func-right-assoc]       type: a -> b -> c ==> (-> a (-> b c))
+[func-paren-left]        type: (a -> b) -> c ==> (-> (-> a b) c)
+[func-list-and-pair]     type: [a] -> (a, b) ==> (-> ([] a) (, a b))
