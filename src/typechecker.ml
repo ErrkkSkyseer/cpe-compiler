@@ -9,8 +9,9 @@ type ty =
   | Bool 
   | Char 
   | String 
-  | List of ty option
-  | Func of ty option * ty option 
+  (* | Var <- generic *)
+  | List of ty option (*List _*)
+  | Func of ty option * ty option (*Func _ _*)
 
  
 let rec string_of_type (t : ty) : string =
@@ -51,7 +52,7 @@ let binop_err_msg pos expect l r =
   prerr_string
     (string_of_positions pos
       ^ ": expected " 
-      ^ String.concat "," (List.map string_of_type expect )
+      ^ String.concat " or " (List.map string_of_type expect )
       ^ " operands, but found "
       ^ string_of_type l
       ^ ", "
@@ -101,9 +102,8 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
           match (tl, tr) with
           (* Both is Int --> Int *)
-          | (Int, Int) -> 
+          | Int, Int -> 
             mk_binop_expr Int r.pos r.op left' right'
-          (* Either one is Float --> Float, 3 cases *)
           | (Int | Float), (Int | Float) -> 
             mk_binop_expr Float r.pos r.op left' right'
           (* Wrong Type *)
@@ -205,6 +205,7 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
         | (tl',List Some tr') -> if tl' == tr' 
           then mk_binop_expr tr r.pos r.op left' right'
           else (prerr_string "List Concat Error message" ;None) 
+        | (_,List None) -> mk_binop_expr (List (Some tl)) r.pos r.op left' right'
         | _ -> binop_err_msg r.pos [List None] tl tr
         )
       | _ -> None
