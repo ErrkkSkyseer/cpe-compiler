@@ -61,7 +61,7 @@ open Ast
 %token RPAREN ")"
 %token LBRACKET "["
 %token RBRACKET "]"
-// %token UNDERSCORE "_"
+%token UNDERSCORE "_"
 
 //-------------------- end of file --------------------
 %token EOF
@@ -82,6 +82,7 @@ open Ast
 %start <unit expr> expr_entry
 %start <typeexpr> type_entry
 %start <param> param_entry
+%start <pattern> pattern_entry
 %%
 //-------------------- blind operators --------------------
 %inline comp_op:
@@ -118,6 +119,9 @@ type_entry:
 
   param_entry:
     | p = param; EOF { p }
+
+  pattern_entry:
+    | p = pattern; EOF { p }
 
 // //-------------------- program --------------------
 prog:
@@ -305,3 +309,29 @@ eq_expr:
         { UnitParam { pos = $loc } }
     | LPAREN; x = IDENT; COLON; t = typeexpr; RPAREN
         { Param { pos = $loc; name = x; ty = t } }
+
+//-------------------- patterns --------------------
+  pattern:
+    | h = pat_con; CONS; t = pattern
+        { PCons { pos = $loc; head = h; tail = t } }
+    | p = pat_con { p }
+
+    pat_con:
+    | c = UIDENT; args = nonempty_list(pat_atom)
+        { PCon { pos = $loc; name = c; args = args } }
+    | p = pat_atom { p }
+
+    pat_atom:
+    | UNDERSCORE     { PWild { pos = $loc } }
+    | x = IDENT      { PVar { pos = $loc; name = x } }
+    | c = UIDENT     { PCon { pos = $loc; name = c; args = [] } }
+    | TRUE           { PCon { pos = $loc; name = "True"; args = [] } }
+    | FALSE          { PCon { pos = $loc; name = "False"; args = [] } }
+    | n = INT_LIT    { PInt { pos = $loc; value = n } }
+    | c = CHAR_LIT   { PChar { pos = $loc; value = c } }
+    | s = STRING_LIT { PString { pos = $loc; value = s } }
+    | LPAREN; RPAREN { PUnit { pos = $loc } }
+    | LBRACKET; RBRACKET { PNil { pos = $loc } }
+    | LPAREN; l = pattern; COMMA; r = pattern; RPAREN
+        { PPair { pos = $loc; left = l; right = r } }
+    | LPAREN; p = pattern; RPAREN { p }

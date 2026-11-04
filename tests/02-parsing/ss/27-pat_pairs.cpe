@@ -1,0 +1,4 @@
+# ---- pairs ----
+[pat-pair]            pattern: (a, b) ==> (, a b)
+[pat-pair-nested]     pattern: ((a, b), c) ==> (, (, a b) c)
+[pat-pair-wildcards]  pattern: (_, _) ==> (, _ _)

@@ -41,9 +41,9 @@ rule read = parse
   | lident '!' lident as s { IDENT s }            (* namespace!name *)
   | lident as s            { match Hashtbl.find_opt keywords s with
                              | Some t -> t | None -> IDENT s }
-  (* | uident as s            { UIDENT s } *)
+  | uident as s            { UIDENT s }
   | uident as s            { IDENT s }
-  (* | '_'                    { UNDERSCORE } *)
+  | '_'                    { UNDERSCORE }
   | '\'' ([^ '\\' '\'' '\n'] as c) '\''         { CHAR_LIT c }
   | '\'' '\\' (_ as c) '\''                      { CHAR_LIT (unescape lexbuf c) }
   | '"'                    { string (Buffer.create 16) lexbuf }

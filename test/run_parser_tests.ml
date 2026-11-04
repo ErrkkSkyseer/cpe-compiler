@@ -1,18 +1,49 @@
+(* dune exec test/run_parser_tests.exe *)
 open CpecmuCompiler
 
 (* ---------- parse แต่ละชนิด ---------- *)
-let parse kind s =
-  let lb = Lexing.from_string s in
+let parse_lb kind lb =
   match kind with
-  | "expr" -> Ast.string_of_expr (Parser.expr_entry Lexer.read lb)
-  | "type" -> Ast.string_of_typeexpr (Parser.type_entry Lexer.read lb)
-  | "param" -> Ast.string_of_param (Parser.param_entry Lexer.read lb)
+  | "expr"    -> Ast.string_of_expr (Parser.expr_entry Lexer.read lb)
+  | "type"    -> Ast.string_of_typeexpr (Parser.type_entry Lexer.read lb)
+  | "param"   -> Ast.string_of_param (Parser.param_entry Lexer.read lb)
+  | "pattern" -> Ast.string_of_pattern (Parser.pattern_entry Lexer.read lb)
   | k -> failwith ("unknown kind: " ^ k)
 
+let col (p : Lexing.position) = p.pos_cnum - p.pos_bol
+
+(* คืน (ผล, รายละเอียด error) *)
 let run kind s =
-  try parse kind s with
-  | Parser.Error -> "ERROR"
-  | Lexer.SyntaxError _ -> "ERROR"
+  let lb = Lexing.from_string s in
+  try (parse_lb kind lb, "") with
+  | Parser.Error ->
+      ( "ERROR",
+        Printf.sprintf "syntax error at column %d, near %S"
+          (col lb.Lexing.lex_curr_p) (Lexing.lexeme lb) )
+  | Lexer.SyntaxError (msg, pos) ->
+      ("ERROR", Printf.sprintf "lexer error: %s (column %d)" msg (col pos))
+
+(* let parse_ok kind s =
+  try Some (parse_lb kind (Lexing.from_string s))
+  with Parser.Error | Lexer.SyntaxError _ -> None *)
+
+(* แสดง token ที่ lexer ส่งออกมา ไว้ดูเวลา parse พลาด *)
+let show_token = function
+  | Parser.IDENT s -> "IDENT(" ^ s ^ ")"
+  | Parser.UIDENT s -> "UIDENT(" ^ s ^ ")"
+  | Parser.INT_LIT n -> "INT(" ^ string_of_int n ^ ")"
+  | Parser.EOF -> "EOF"
+  | _ -> "<other>"
+
+let dump_tokens s =
+  let lb = Lexing.from_string s in
+  let rec go acc =
+    match Lexer.read lb with
+    | Parser.EOF -> List.rev ("EOF" :: acc)
+    | t -> go (show_token t :: acc)
+    | exception _ -> List.rev ("<lexer error>" :: acc)
+  in
+  String.concat " " (go [])
 
 (* ---------- helper ---------- *)
 let split_on sep s =
@@ -56,12 +87,14 @@ let run_file path =
             let kind = String.sub lhs 0 i in
             let input = String.trim (String.sub lhs (i + 1) (String.length lhs - i - 1)) in
             let expected = String.trim expected in
-            let actual = run kind input in
+            let actual, detail = run kind input in
             if actual = expected then incr pass
             else begin
               incr fail;
               Printf.printf "FAIL %s:%d [%s] %s: %s\n  expected: %s\n  actual:   %s\n"
-                path (idx + 1) name kind input expected actual
+                path (idx + 1) name kind input expected actual;
+              if detail <> "" then Printf.printf "  why:      %s\n" detail;
+              Printf.printf "  tokens:   %s\n" (dump_tokens input)
             end
         | _ ->
             incr fail;
