@@ -10,5 +10,4 @@
 
 (executable
  (name run_parser_tests)
- (modules run_parser_tests)
  (libraries cpecmuCompiler))

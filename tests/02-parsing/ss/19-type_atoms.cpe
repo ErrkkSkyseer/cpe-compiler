@@ -1,0 +1,3 @@
+# ---- atoms ----
+[atom-named-type]        type: Integer ==> Integer
+[atom-type-variable]     type: a ==> a

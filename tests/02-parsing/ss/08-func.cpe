@@ -1,0 +1,1 @@
+[function operator] expr: a.b.c ==> (. a (. b c))

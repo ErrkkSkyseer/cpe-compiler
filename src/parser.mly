@@ -20,7 +20,7 @@ open Ast
 %token THEN "then"
 // %token MATCH "match"
 %token <string> IDENT
-// %token <string> UIDENT
+%token <string> UIDENT
 
 //-------------------- literals --------------------
 %token <int> INT_LIT
@@ -40,7 +40,7 @@ open Ast
 %token OROR "||" 
 %token CONS "::"
 %token APPEND "++"
-// %token ARROW "->"
+%token ARROW "->"
 // %token FATARROW "=>"
 %token PLUS "+" 
 %token MINUS "-"
@@ -79,10 +79,11 @@ open Ast
 
 (* starting nonterminal *)
 %start <unit prog> start
-// %start <unit expr> start
+%start <unit expr> expr_entry
+%start <typeexpr> type_entry
 %%
 //-------------------- blind operators --------------------
-%inline eq_op:
+%inline comp_op:
   | EQ { Eq }
   | NEQ { Neq }
   | LT { Lt }
@@ -90,7 +91,7 @@ open Ast
   | GE { Ge }
   | GT { Gt }
 
-%inline con_op:
+%inline list_op:
   | CONS { Cons }
   | APPEND { Append }
 
@@ -108,6 +109,13 @@ open Ast
 start:
   | prog = prog; EOF { prog }
 
+expr_entry:
+  | e = expr; EOF { e }
+
+type_entry:
+  | t = typeexpr; EOF { t }
+
+// //-------------------- program --------------------
 prog:
   | e = expr
     { { imports = [];
@@ -172,7 +180,7 @@ and_expr:
   | e = eq_expr { e }
 
 eq_expr:
-  | l = cons_expr; op = eq_op; r = cons_expr 
+  | l = cons_expr; op = comp_op; r = cons_expr 
     { BinExpr {
         prop = ();
         pos = $loc;
@@ -184,7 +192,7 @@ eq_expr:
   | e = cons_expr { e }
 
   cons_expr:
-    | l = add_expr; op = con_op; r = cons_expr
+    | l = add_expr; op = list_op; r = cons_expr
       { BinExpr {
           prop = ();
           pos = $loc;
@@ -268,7 +276,21 @@ eq_expr:
     | LPAREN; e = expr; RPAREN { e }
   
   //-------------------- type expressions --------------------
-  // typeexpr:                                      
-  // | l = type_app; ARROW; r = typeexpr
-  //     { FuncType { pos = $loc; arg = l; ret = r } }
-  // | t = type_app { t }
+  typeexpr:                                      
+  | l = type_app; ARROW; r = typeexpr
+      { FuncType { pos = $loc; arg = l; ret = r } }
+  | t = type_app { t }
+
+  type_app:                                           
+    | f = type_app; x = type_atom
+        { TypeApp { pos = $loc; func = f; arg = x } }
+    | t = type_atom { t }
+
+    type_atom:
+    | x = IDENT   { TypeVar { pos = $loc; name = x } } // type identifiers
+    | x = UIDENT  { TypeVar { pos = $loc; name = x } } // variable identifiers
+    | LBRACKET; t = typeexpr; RBRACKET
+        { ListType { pos = $loc; elem = t } }
+    | LPAREN; l = typeexpr; COMMA; r = typeexpr; RPAREN
+        { PairType { pos = $loc; left = l; right = r } }
+    | LPAREN; t = typeexpr; RPAREN { t }

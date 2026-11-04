@@ -1,0 +1,1 @@
+[equation] expr: a == b ==> (== a b)

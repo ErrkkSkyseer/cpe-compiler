@@ -47,7 +47,8 @@ rule read = parse
   | '\'' ([^ '\\' '\'' '\n'] as c) '\''         { CHAR_LIT c }
   | '\'' '\\' (_ as c) '\''                      { CHAR_LIT (unescape lexbuf c) }
   | '"'                    { string (Buffer.create 16) lexbuf }
-  (* | "->" { ARROW } | "=>" { FATARROW } *)
+  | "->" { ARROW } 
+  (* | "=>" { FATARROW } *)
   | "==" { EQ } | "!=" { NEQ } | "<=" { LE } | ">=" { GE }
   | "<" { LT } | ">" { GT } 
   (* | "=" { ASSIGN } *)

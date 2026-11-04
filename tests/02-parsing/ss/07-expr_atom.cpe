@@ -1,0 +1,8 @@
+[Integer] expr: 42 ==> 42  
+[Float] expr: 3.14 ==> 3.14
+[Char] expr: 'a' ==> 'a'
+[String] expr: "hi" ==> "hi"
+[Boolean] expr: True ==> True
+[Unit] expr: () ==> ()
+[Empty List] expr: [] ==> []
+[Pair] expr: (1, 2) ==> (, 1 2)

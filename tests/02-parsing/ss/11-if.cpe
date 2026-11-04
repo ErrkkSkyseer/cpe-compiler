@@ -1,0 +1,1 @@
+[if operator] expr: if a then b else if c then d else e ==> (if a b (if c d e))
