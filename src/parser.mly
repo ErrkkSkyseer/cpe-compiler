@@ -53,7 +53,7 @@ open Ast
 %token DOLLAR "$"
 // %token ASSIGN "="
 // %token BAR "|"
-// %token COLON ":"
+%token COLON ":"
 %token COMMA ","
 // %token EXC "!" 
 // %token BACKSLASH "\\"
@@ -81,6 +81,7 @@ open Ast
 %start <unit prog> start
 %start <unit expr> expr_entry
 %start <typeexpr> type_entry
+%start <param> param_entry
 %%
 //-------------------- blind operators --------------------
 %inline comp_op:
@@ -114,6 +115,9 @@ expr_entry:
 
 type_entry:
   | t = typeexpr; EOF { t }
+
+  param_entry:
+    | p = param; EOF { p }
 
 // //-------------------- program --------------------
 prog:
@@ -294,3 +298,10 @@ eq_expr:
     | LPAREN; l = typeexpr; COMMA; r = typeexpr; RPAREN
         { PairType { pos = $loc; left = l; right = r } }
     | LPAREN; t = typeexpr; RPAREN { t }
+
+//-------------------- parameters --------------------
+  param:
+    | LPAREN; RPAREN
+        { UnitParam { pos = $loc } }
+    | LPAREN; x = IDENT; COLON; t = typeexpr; RPAREN
+        { Param { pos = $loc; name = x; ty = t } }

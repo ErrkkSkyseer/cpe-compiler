@@ -6,6 +6,7 @@ let parse kind s =
   match kind with
   | "expr" -> Ast.string_of_expr (Parser.expr_entry Lexer.read lb)
   | "type" -> Ast.string_of_typeexpr (Parser.type_entry Lexer.read lb)
+  | "param" -> Ast.string_of_param (Parser.param_entry Lexer.read lb)
   | k -> failwith ("unknown kind: " ^ k)
 
 let run kind s =

@@ -1,0 +1,6 @@
+# ---- typed param ----
+[param-simple]        param: (x : Integer) ==> (x Integer)
+[param-list]          param: (xs : [a]) ==> (xs ([] a))
+[param-func]          param: (f : a -> b) ==> (f (-> a b))
+[param-pair]          param: (p : (a, b)) ==> (p (, a b))
+[param-applied-type]  param: (t : Tree a) ==> (t (Tree a))

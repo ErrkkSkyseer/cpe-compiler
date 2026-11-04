@@ -54,7 +54,7 @@ rule read = parse
   (* | "=" { ASSIGN } *)
   | "&&" { ANDAND } | "||" { OROR }
   | "::" { CONS } 
-  (* | ":" { COLON }  *)
+  | ":" { COLON } 
   | "++" { APPEND }
   | "+" { PLUS } | "-" { MINUS } | "*" { TIMES }
   | "//" { IDIV } | "/" { DIV } | "%" { MOD }
