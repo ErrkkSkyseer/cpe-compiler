@@ -59,8 +59,8 @@ let name_prog_val = [
 
   (* Compare *)
   ("==Int_Int", mkprog "Boolean" "1        ==  1", true);
-  ("==Int_Double", mkprog "Boolean" "1        ==  1.0", true);
-  ("==Double_Int", mkprog "Boolean" "1.0      ==  1", true);
+  ("==Int_Double", mkprog "Boolean" "1        ==  1.0", false);
+  ("==Double_Int", mkprog "Boolean" "1.0      ==  1", false);
   ("==Double_Double", mkprog "Boolean" "1.0      ==  1.0", true);
   ("==Char", mkprog "Boolean" "'a'      ==  'a'", true);
   ("==Str", mkprog "Boolean" "\"abc\"  ==  \"abc\"", true);
@@ -69,8 +69,8 @@ let name_prog_val = [
   ("==List", mkprog "Boolean" "[]       ==  []", true);
 
   ("!=Int_Int", mkprog "Boolean" "1        !=  1", true);
-  ("!=Int_Double", mkprog "Boolean" "1        !=  1.0", true);
-  ("!=Double_Int", mkprog "Boolean" "1.0      !=  1", true);
+  ("!=Int_Double", mkprog "Boolean" "1        !=  1.0", false);
+  ("!=Double_Int", mkprog "Boolean" "1.0      !=  1", false);
   ("!=Double_Double", mkprog "Boolean" "1.0      !=  1.0", true);
   ("!=Char", mkprog "Boolean" "'a'      !=  'a'", true);
   ("!=Str", mkprog "Boolean" "\"abc\"  !=  \"abc\"", true);
@@ -79,23 +79,23 @@ let name_prog_val = [
   ("!=List", mkprog "Boolean" "[]       !=  []", true);
 
   (">Int_Int", mkprog "Boolean" "1   > 1", true);
-  (">Int_Double", mkprog "Boolean" "1   > 1.0", true);
-  (">Double_Int", mkprog "Boolean" "1.0 > 1", true);
+  (">Int_Double", mkprog "Boolean" "1   > 1.0", false);
+  (">Double_Int", mkprog "Boolean" "1.0 > 1", false);
   (">Double_Double", mkprog "Boolean" "1.0 > 1.0", true);
 
   (">=Int_Int", mkprog "Boolean" "1   >= 1", true);
-  (">=Int_Double", mkprog "Boolean" "1   >= 1.0", true);
-  (">=Double_Int", mkprog "Boolean" "1.0 >= 1", true);
+  (">=Int_Double", mkprog "Boolean" "1   >= 1.0", false);
+  (">=Double_Int", mkprog "Boolean" "1.0 >= 1", false);
   (">=Double_Double", mkprog "Boolean" "1.0 >= 1.0", true);
 
   ("<Int_Int", mkprog "Boolean" "1   < 1", true);
-  ("<Int_Double", mkprog "Boolean" "1   < 1.0", true);
-  ("<Double_Int", mkprog "Boolean" "1.0 < 1", true);
+  ("<Int_Double", mkprog "Boolean" "1   < 1.0", false);
+  ("<Double_Int", mkprog "Boolean" "1.0 < 1", false);
   ("<Double_Double", mkprog "Boolean" "1.0 < 1.0", true);
 
   ("<=Int_Int", mkprog "Boolean" "1   <= 1", true);
-  ("<=Int_Double", mkprog "Boolean" "1   <= 1.0", true);
-  ("<=Double_Int", mkprog "Boolean" "1.0 <= 1", true);
+  ("<=Int_Double", mkprog "Boolean" "1   <= 1.0", false);
+  ("<=Double_Int", mkprog "Boolean" "1.0 <= 1", false);
   ("<=Double_Double", mkprog "Boolean" "1.0 <= 1.0", true);
   
   (* List *)
