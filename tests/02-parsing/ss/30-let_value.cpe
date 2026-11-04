@@ -1,0 +1,5 @@
+# ---- let value ----
+[let-simple]          expr: let x = 1 in x ==> (let ((x 1)) x)
+[let-body-extends]    expr: let x = 1 in x + 2 * 3 ==> (let ((x 1)) (+ x (* 2 3)))
+[let-multi-and]       expr: let x = 1 and y = 2 in x + y ==> (let ((x 1) (y 2)) (+ x y))
+[let-nested]          expr: let x = 1 in let y = 2 in x + y ==> (let ((x 1)) (let ((y 2)) (+ x y)))

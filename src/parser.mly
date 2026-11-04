@@ -15,10 +15,11 @@ open Ast
 // %token WITH "with"
 // %token AS "as"
 // %token DATA "data"
-// %token LET "let"
-// %token IN "in"
+%token LET "let"
+%token IN "in"
 %token THEN "then"
 // %token MATCH "match"
+%token AND "and"
 %token <string> IDENT
 %token <string> UIDENT
 
@@ -51,7 +52,7 @@ open Ast
 %token GT ">"
 %token DOT "."
 %token DOLLAR "$"
-// %token ASSIGN "="
+%token ASSIGN "="
 // %token BAR "|"
 %token COLON ":"
 %token COMMA ","
@@ -67,6 +68,8 @@ open Ast
 %token EOF
 
 (* precedence and associativity declarations *)
+// %nonassoc LOW
+// %nonassoc BAR
 // %right DOLLAR
 // %right OROR
 // %right ANDAND
@@ -137,8 +140,21 @@ prog:
 
 //-------------------- expressions --------------------
 expr:
-  | e = if_expr { e }
+  | e = let_expr    { e }
+  // | e = lambda_expr { e }
+  // | e = match_expr  { e }
+  | e = if_expr     { e }
   | e = dollar_expr { e }
+
+let_expr:
+  | LET; bs = separated_nonempty_list(AND, letbinding); IN; b = expr
+      { LetExpr { prop = (); pos = $loc; bindings = bs; body = b } }
+    
+letbinding:
+  | x = IDENT; ASSIGN; v = expr
+      { LetValue { pos = $loc; name = x; value = v } }
+  | x = IDENT; ps = nonempty_list(param); COLON; t = typeexpr; ASSIGN; b = expr
+      { LetFunction { pos = $loc; name = x; params = ps; return_type = t; body = b } }
 
 if_expr:
   | IF; c = expr; THEN; t = expr; ELSE; e = expr
@@ -295,8 +311,8 @@ eq_expr:
     | t = type_atom { t }
 
     type_atom:
-    | x = IDENT   { TypeVar { pos = $loc; name = x } } // type identifiers
-    | x = UIDENT  { TypeVar { pos = $loc; name = x } } // variable identifiers
+    | x = IDENT   { TypeVar { pos = $loc; name = x } } // variable identifiers
+    | x = UIDENT  { TypeVar { pos = $loc; name = x } } // type identifiers
     | LBRACKET; t = typeexpr; RBRACKET
         { ListType { pos = $loc; elem = t } }
     | LPAREN; l = typeexpr; COMMA; r = typeexpr; RPAREN

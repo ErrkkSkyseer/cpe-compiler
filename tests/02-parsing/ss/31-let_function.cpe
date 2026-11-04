@@ -1,0 +1,4 @@
+# ---- let function ----
+[letfun-simple]       expr: let f (n : Integer) : Integer = n + 1 in f 2 ==> (let ((f ((n Integer)) Integer (+ n 1))) (f 2))
+[letfun-unit-param]   expr: let f () : Integer = 1 in f () ==> (let ((f (()) Integer 1)) (f ()))
+[letfun-and]          expr: let f (n : Integer) : Integer = n and g (m : Integer) : Integer = m in f 1 ==> (let ((f ((n Integer)) Integer n) (g ((m Integer)) Integer m)) (f 1))
