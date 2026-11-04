@@ -8,7 +8,6 @@ type ty =
   | Float 
   | Bool 
   | Char 
-  | String 
   | List of ty option
   | Func of ty option * ty option 
 
@@ -16,11 +15,10 @@ type ty =
 let rec string_of_type (t : ty) : string =
   match t with
   | Unit -> "()"
-  | Int -> "int"
-  | Float -> "float"
-  | Bool -> "bool"
-  | Char -> "char"
-  | String -> "string"
+  | Int -> "Integer"
+  | Float -> "Double"
+  | Bool -> "Bool"
+  | Char -> "Char"
   | List t' ->( 
     match t' with
     | Some t -> "["^ string_of_type t ^"]"
@@ -30,11 +28,11 @@ let rec string_of_type (t : ty) : string =
     let a' =  
       match a with
       | Some t' -> string_of_type t' 
-      | None -> "" in
+      | None -> "?" in
     let b' = 
       match b with
       | Some t' -> string_of_type t' 
-      | None -> "" in
+      | None -> "?" in
     a' ^ "->" ^ b'
 
 let uop_err_msg (pos : pos) (expect : ty) (got : ty) = 
@@ -42,7 +40,7 @@ let uop_err_msg (pos : pos) (expect : ty) (got : ty) =
     (string_of_positions pos
       ^ ": expected " 
       ^ string_of_type expect 
-      ^ " operands, but found " 
+      ^ " or double operands, but found " 
       ^ string_of_type got
       ^ "\n"
     ); None 
@@ -51,7 +49,7 @@ let binop_err_msg pos expect l r =
   prerr_string
     (string_of_positions pos
       ^ ": expected " 
-      ^ String.concat "," (List.map string_of_type expect )
+      ^ String.concat " or " (List.map string_of_type expect )
       ^ " operands, but found "
       ^ string_of_type l
       ^ ", "
@@ -77,7 +75,7 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
   | FloatLit r -> Some (FloatLit { r with prop = Float })
   | CharLit r -> Some (CharLit { r with prop = Char })
   | BoolLit r -> Some (BoolLit { r with prop = Bool })
-  | StringLit r -> Some (StringLit { r with prop = String })
+  | StringLit r -> Some (StringLit { r with prop = List (Some Char) })
   | EmptyListLit r -> Some (EmptyListLit { r with prop = List None })
 
   (* Unary Operation *)
@@ -132,7 +130,7 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
           | (Int | Float), (Int | Float)-> 
             mk_binop_expr Float r.pos r.op left' right'
           | _ -> 
-            binop_err_msg r.pos [Float] tl tr
+            binop_err_msg r.pos [Int;Float] tl tr
         )
       | _ -> None
     )
@@ -171,14 +169,16 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
       | (Some left', Some right') -> (
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
         match (tl,tr) with
-        | (Int | Float), (Int | Float) -> mk_binop_expr Bool r.pos r.op left' right'
-        | _ -> if tl == tr 
+        | (List None, List _) | (List _, List None) ->
+          mk_binop_expr Bool r.pos r.op left' right'
+        | _ -> if tl = tr 
           then mk_binop_expr Bool r.pos r.op left' right'
           else (prerr_string (string_of_positions r.pos 
             ^ ": expected same type but got "
             ^ string_of_type tl 
             ^"," 
-            ^ string_of_type tr );
+            ^ string_of_type tr
+            ^ "\n");
             None)
         )
       | _ -> None
@@ -190,7 +190,7 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
       | (Some left', Some right') -> (
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
         match (tl,tr) with
-        | (Int | Float),(Int | Float) -> mk_binop_expr Bool r.pos r.op left' right' 
+        | (Int, Int) | (Float, Float) -> mk_binop_expr Bool r.pos r.op left' right' 
         | _ -> binop_err_msg r.pos [Int;Float] tl tr
         )
       | _ -> None
@@ -202,9 +202,14 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
       | (Some left', Some right') -> (
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
         match (tl,tr) with
-        | (tl',List Some tr') -> if tl' == tr' 
+        | (tl', List None) ->
+          mk_binop_expr (List (Some tl')) r.pos r.op left' right'
+        | (tl',List Some tr') -> if tl' = tr' 
           then mk_binop_expr tr r.pos r.op left' right'
-          else (prerr_string "List Concat Error message" ;None) 
+          else (prerr_string (string_of_positions r.pos
+          ^ ": operator ::: expected a list of " ^ string_of_type tl
+          ^ " on the right, but found " ^ string_of_type tr ^ "\n");
+          None) 
         | _ -> binop_err_msg r.pos [List None] tl tr
         )
       | _ -> None
@@ -216,9 +221,14 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
       | (Some left', Some right') -> (
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
         match (tl,tr) with
-        | (List tl',List tr') -> if tl' == tr' 
+        | (List None, List _) -> mk_binop_expr tr r.pos r.op left' right'
+        | (List _, List None) -> mk_binop_expr tl r.pos r.op left' right'
+        | (List tl',List tr') -> if tl' = tr' 
           then mk_binop_expr tr r.pos r.op left' right'
-          else (prerr_string "List Concat Error message" ;None) 
+          else (prerr_string (string_of_positions r.pos
+          ^ ": operator ++: expected two lists of the same type, but found "
+          ^ string_of_type tl ^ ", " ^ string_of_type tr ^ "\n");
+          None) 
         | _ -> binop_err_msg r.pos [List None; List None] tl tr
         )
       | _ -> None
@@ -230,10 +240,16 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
       | (Some left', Some right') -> (
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
         match (tl,tr) with
-        | (Func (a,lb),Func (rb,c)) -> if lb == rb 
+        | (Func (lb,c),Func (a,rb)) -> if lb = rb 
           then mk_binop_expr (Func (a,c)) r.pos r.op left' right'
-          else (prerr_string "Function Composition Error message" ;None) 
-        | _ -> (prerr_string "Function Composition Error message" ;None) 
+          else (prerr_string (string_of_positions r.pos
+          ^ ": operator .: cannot compose " ^ string_of_type tl
+          ^ " with " ^ string_of_type tr ^ "\n");
+          None) 
+        | _ -> (prerr_string (string_of_positions r.pos
+               ^ ": operator .: cannot compose " ^ string_of_type tl
+               ^ " with " ^ string_of_type tr ^ "\n");
+               None)
         )
       | _ -> None
     )
@@ -244,10 +260,16 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
       | (Some left', Some right') -> (
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
         match (tl,tr) with
-        | (Func (Some a,Some b),tr') -> if tr' == a 
+        | (Func (Some a,Some b),tr') -> if tr' = a 
           then mk_binop_expr b r.pos r.op left' right'
-          else (prerr_string "Function Application Error message" ;None) 
-        | _ -> (prerr_string "Function Application Error message" ;None) 
+          else (prerr_string (string_of_positions r.pos
+          ^ ": operator $: cannot apply " ^ string_of_type tl
+          ^ " to " ^ string_of_type tr ^ "\n");
+          None)
+        | _ -> (prerr_string (string_of_positions r.pos
+               ^ ": operator $: cannot apply " ^ string_of_type tl
+               ^ " to " ^ string_of_type tr ^ "\n");
+               None)
         )
       | _ -> None
     )
