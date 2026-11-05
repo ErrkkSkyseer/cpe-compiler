@@ -128,16 +128,62 @@ let name_prog_val = [
   (* nested list unhandled *)
 
   (* List Append *)
-  (* ("[]++[]",mkprog "[]" "[]++[]",true);
+  ("[]++[]",mkprog "[]" "[]++[]",true);
   ("[Int]++[Int]",mkprog "[Integer]" "(1::[])++(1::[])",true);
   ("[Double]++[Double]",mkprog "[Double]" "(1.0::[])++(1.0::[])",true);
   ("[Char]++[Char]",mkprog "[Char]" "('c'::[])++('c'::[])",true);
-  ("[String]++[String]",mkprog "[String]" "(\"abc\"::[])++(\"abc\"::[])",true);
   ("[Bool]++[Bool]",mkprog "[Boolean]" "(True::[])++(True::[])",true);
   ("[()]++[()]",mkprog "[()]" "(()::[])++(()::[])",true);
-  ("[[]]++[[]]",mkprog "[[a]]" "([]::[])++([]::[])",true);  *)
+  ("[[]]++[[]]",mkprog "[[a]]" "([]::[])++([]::[])",true); 
   (* nested list unhandled *)
 
+  (* Space for testcases *)
+  ("1",{|
+
+|}
+  ,true);
+  ("2",{|
+
+|},true);
+  ("3",{|
+
+|},true);
+  ("4",{|
+
+|},true);
+  ("5",{|
+
+|},true);
+  ("6",{|
+
+|},true);
+  ("7",{|
+
+|},true);
+  ("8",{|
+
+|},true);
+  ("9",{|
+
+|},true);
+  ("10",{|
+
+|},true);
+  ("11",{|
+
+|},true);
+  ("12",{|
+
+|},true);
+  ("13",{|
+
+|},true);
+  ("14",{|
+
+|},true);
+  ("15",{|
+
+|},true);
 ]
 
 

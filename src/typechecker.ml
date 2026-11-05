@@ -220,6 +220,7 @@ let rec typecheck_expr (e : unit expr) : ty expr option =
       | (Some left', Some right') -> (
         let (tl,tr) = (prop_of_expr left',prop_of_expr right') in
         match (tl,tr) with
+        | (List None, List None) -> mk_binop_expr (List None) r.pos r.op left' right' 
         | (List None, List _) -> mk_binop_expr tr r.pos r.op left' right'
         | (List _, List None) -> mk_binop_expr tl r.pos r.op left' right'
         | (List tl',List tr') -> if tl' = tr' 

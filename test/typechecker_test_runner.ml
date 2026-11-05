@@ -33,6 +33,19 @@ let expression_testcases = [
     (EmptyListLit {prop = (); pos = dummypos;}),
     (Some (EmptyListLit {prop = List None; pos = dummypos;})));
   
+  ("[]++[]",
+    ( BinExpr {
+      prop = (); 
+      pos = dummypos;
+      op = Append;
+      left = (EmptyListLit {prop = (); pos = dummypos;}); 
+      right = (EmptyListLit {prop = (); pos = dummypos;})}),
+    ( Some (BinExpr {
+      prop = List None; 
+      pos = dummypos;
+      op = Append;
+      left = (EmptyListLit {prop = List None; pos = dummypos;}); 
+      right = (EmptyListLit {prop = List None; pos = dummypos;})})));
 
 ]
 
