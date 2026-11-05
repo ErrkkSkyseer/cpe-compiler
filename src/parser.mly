@@ -12,13 +12,13 @@ open Ast
 // %token TYPE "type"
 %token IF "if"
 %token ELSE "else"
-// %token WITH "with"
+%token WITH "with"
 // %token AS "as"
 // %token DATA "data"
 %token LET "let"
 %token IN "in"
 %token THEN "then"
-// %token MATCH "match"
+%token MATCH "match"
 %token AND "and"
 %token <string> IDENT
 %token <string> UIDENT
@@ -53,7 +53,7 @@ open Ast
 %token DOT "."
 %token DOLLAR "$"
 %token ASSIGN "="
-// %token BAR "|"
+%token BAR "|"
 %token COLON ":"
 %token COMMA ","
 // %token EXC "!" 
@@ -68,17 +68,8 @@ open Ast
 %token EOF
 
 (* precedence and associativity declarations *)
-// %nonassoc LOW
-// %nonassoc BAR
-// %right DOLLAR
-// %right OROR
-// %right ANDAND
-// %nonassoc EQ NEQ LT LE GE GT
-// %right CONS APPEND
-// %left PLUS MINUS
-// %left TIMES DIV IDIV MOD
-// %nonassoc UMINUS
-// %right DOT
+%nonassoc LOW
+%nonassoc BAR
 
 (* starting nonterminal *)
 %start <unit prog> start
@@ -142,7 +133,7 @@ prog:
 expr:
   | e = let_expr    { e }
   | e = lambda_expr { e }
-  // | e = match_expr  { e }
+  | e = match_expr  { e }
   | e = if_expr     { e }
   | e = dollar_expr { e }
 
@@ -161,6 +152,19 @@ letbinding:
 lambda_expr: 
   | BACKSLASH; ps = nonempty_list(param); COLON; t = typeexpr; FATARROW; b = expr
       { Lambda { prop = (); pos = $loc; params = ps; return_type = t; body = b } }
+
+//-------------------- match expressions --------------------
+match_expr:
+  | MATCH; e = expr; WITH; cs = cases
+      { MatchExpr { prop = (); pos = $loc; scrutinee = e; cases = cs } }
+
+cases:
+  | c = case %prec LOW      { [c] }
+  | c = case; cs = cases    { c :: cs }
+
+case:
+  | BAR; p = pattern; ARROW; b = expr
+      { { case_pos = $loc; ptrn = p; case_body = b } }
 
 //-------------------- if expressions --------------------
 if_expr:

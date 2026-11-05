@@ -1,0 +1,10 @@
+[match-one-case]      expr: match x with | _ -> 1 ==> (match x ((-> _ 1)))
+[match-two-cases]     expr: match xs with | [] -> [] | hd::tl -> f hd :: map f tl ==> (match xs ((-> [] []) (-> (:: hd tl) (:: (f hd) ((map f) tl)))))
+[match-bool]          expr: match b with | False -> True | True -> False ==> (match b ((-> False True) (-> True False)))
+[match-constructor]   expr: match t with | Leaf -> [] | Node v l r -> v ==> (match t ((-> Leaf []) (-> (Node v l r) v)))
+[match-scrut-expr]    expr: match f x with | _ -> 1 ==> (match (f x) ((-> _ 1)))
+[match-pair-scrut]    expr: match (p, q) with | (True, True) -> True | _ -> False ==> (match (, p q) ((-> (, True True) True) (-> _ False)))
+
+# ---- match ซ้อน: | ต้องเป็นของ match ในสุด ----
+[match-nested-inner-takes-bar] expr: match a with | x::xs -> match b with | [] -> 1 | _ -> 2 ==> (match a ((-> (:: x xs) (match b ((-> [] 1) (-> _ 2))))))
+[match-nested-paren-outer]     expr: match a with | [] -> (match b with | _ -> 1) | _ -> 2 ==> (match a ((-> [] (match b ((-> _ 1)))) (-> _ 2)))

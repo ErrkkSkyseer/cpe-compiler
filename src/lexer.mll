@@ -9,7 +9,7 @@ let keywords = Hashtbl.create 16
     "match", MATCH; "with", WITH; "let", LET; "and", AND; "in", IN;
     "if", IF; "then", THEN; "else", ELSE ] *)
 let () = List.iter (fun (k, t) -> Hashtbl.add keywords k t)
-  [ "if", IF; "then", THEN; "else", ELSE; "let", LET; "and", AND; "in", IN  ]
+  [ "if", IF; "then", THEN; "else", ELSE; "let", LET; "and", AND; "in", IN; "match", MATCH; "with", WITH ]
 
 let int_lit s lexbuf =
   match int_of_string_opt s with
@@ -60,7 +60,7 @@ rule read = parse
   | "//" { IDIV } | "/" { DIV } | "%" { MOD }
   | "." { DOT } | "$" { DOLLAR } 
   | "\\" { BACKSLASH } 
-  (* | "|" { BAR } *)
+  | "|" { BAR }
   | "," { COMMA } | "(" { LPAREN } | ")" { RPAREN }
   | "[" { LBRACKET } | "]" { RBRACKET }
   | eof                    { EOF }
