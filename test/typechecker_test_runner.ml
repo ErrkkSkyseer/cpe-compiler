@@ -11,9 +11,29 @@ let dummypos' : Lexing.position = {
 let dummypos : pos = (dummypos',dummypos') 
 
 let expression_testcases = [
-  ("Sample",
+  ("UnitLit",
+    (UnitLit {prop = (); pos = dummypos;}),
+    (Some (UnitLit {prop = Unit; pos = dummypos;})));
+  ("IntLit",
     (IntLit {prop = (); pos = dummypos; value = 0;}),
     (Some (IntLit {prop = Int; pos = dummypos; value = 0;})));
+  ("FloatLit",
+    (FloatLit {prop = (); pos = dummypos; value = 0.0;}),
+    (Some (FloatLit {prop = Float; pos = dummypos; value = 0.0;})));
+  ("CharLit",
+    (CharLit {prop = (); pos = dummypos; value = 'a';}),
+    (Some (CharLit {prop = Char; pos = dummypos; value = 'a';})));
+  ("StringLit",
+    (StringLit {prop = (); pos = dummypos; value = "abc";}),
+    (Some (StringLit {prop = List (Some Char); pos = dummypos; value = "abc";})));
+  ("BoolLit",
+    (BoolLit {prop = (); pos = dummypos; value = true;}),
+    (Some (BoolLit {prop = Bool; pos = dummypos; value = true;})));
+  ("EmptyListLit",
+    (EmptyListLit {prop = (); pos = dummypos;}),
+    (Some (EmptyListLit {prop = List None; pos = dummypos;})));
+  
+
 ]
 
 let test_typecheck_expr ast ty =
