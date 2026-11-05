@@ -1,0 +1,6 @@
+x -> y
+x => y
+f x
+f (x)
+(x : Integer) -> Bool
+\x : Integer => x

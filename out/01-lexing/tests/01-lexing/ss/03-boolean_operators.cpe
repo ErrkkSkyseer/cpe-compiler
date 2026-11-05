@@ -1,0 +1,12 @@
+Bool(true)
+Sym(&&)
+Bool(false)
+Bool(false)
+Sym(||)
+Bool(true)
+Bool(true)
+Sym(&&)
+Bool(true)
+Sym(||)
+Bool(false)
+EOF

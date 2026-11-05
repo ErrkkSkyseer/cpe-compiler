@@ -1,0 +1,23 @@
+import Math as M
+
+data Tree
+type Number
+
+def isEven (x : Integer) : Bool =
+  if x == 0 then
+    True
+  else
+    if x < 0 then
+      isEven (-x)
+    else
+      isOdd (x - 1)
+
+def main (args : [String]) : String =
+  let numbers = [1, 2, 3, 4, 5] in
+  let result = numbers ++ [6, 7] in
+  if True && False || True then
+    "hello\nworld"
+  else
+    "error"
+
+(* end of test *)

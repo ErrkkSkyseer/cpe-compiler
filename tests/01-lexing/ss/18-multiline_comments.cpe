@@ -1,0 +1,8 @@
+1 + (* this is a comment *) 2
+
+(* comment
+   over
+   multiple
+   lines *)
+
+x * 10

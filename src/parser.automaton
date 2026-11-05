@@ -1,0 +1,1882 @@
+State 0:
+## Known stack suffix:
+##
+## LR(1) items:
+start' -> . start [ # ]
+## Transitions:
+-- On LPAREN shift to state 1
+-- On start shift to state 106
+-- On prog shift to state 107
+-- On list(defn) shift to state 109
+-- On defn shift to state 110
+## Reductions:
+-- On EOF
+--   reduce production list(defn) ->
+
+State 1:
+## Known stack suffix:
+## LPAREN
+## LR(1) items:
+defn -> LPAREN . DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr RPAREN [ LPAREN EOF ]
+## Transitions:
+-- On DEF shift to state 2
+## Reductions:
+
+State 2:
+## Known stack suffix:
+## LPAREN DEF
+## LR(1) items:
+defn -> LPAREN DEF . IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr RPAREN [ LPAREN EOF ]
+## Transitions:
+-- On IDENT shift to state 3
+## Reductions:
+
+State 3:
+## Known stack suffix:
+## LPAREN DEF IDENT
+## LR(1) items:
+defn -> LPAREN DEF IDENT . LPAREN nonempty_list(param) RPAREN typeexpr expr RPAREN [ LPAREN EOF ]
+## Transitions:
+-- On LPAREN shift to state 4
+## Reductions:
+
+State 4:
+## Known stack suffix:
+## LPAREN DEF IDENT LPAREN
+## LR(1) items:
+defn -> LPAREN DEF IDENT LPAREN . nonempty_list(param) RPAREN typeexpr expr RPAREN [ LPAREN EOF ]
+## Transitions:
+-- On LPAREN shift to state 5
+-- On param shift to state 28
+-- On nonempty_list(param) shift to state 30
+## Reductions:
+
+State 5:
+## Known stack suffix:
+## LPAREN
+## LR(1) items:
+param -> LPAREN . RPAREN [ RPAREN LPAREN ]
+param -> LPAREN . IDENT typeexpr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On RPAREN shift to state 6
+-- On IDENT shift to state 7
+## Reductions:
+
+State 6:
+## Known stack suffix:
+## LPAREN RPAREN
+## LR(1) items:
+param -> LPAREN RPAREN . [ RPAREN LPAREN ]
+## Transitions:
+## Reductions:
+-- On RPAREN LPAREN
+--   reduce production param -> LPAREN RPAREN
+
+State 7:
+## Known stack suffix:
+## LPAREN IDENT
+## LR(1) items:
+param -> LPAREN IDENT . typeexpr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 26
+## Reductions:
+
+State 8:
+## Known stack suffix:
+## LPAREN
+## LR(1) items:
+typeexpr -> LPAREN . LBRACKET RBRACKET typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+typeexpr -> LPAREN . COMMA typeexpr typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+typeexpr -> LPAREN . ARROW typeexpr typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+typeexpr -> LPAREN . typeexpr typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+typeexpr -> LPAREN . typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On LBRACKET shift to state 9
+-- On IDENT shift to state 11
+-- On COMMA shift to state 14
+-- On ARROW shift to state 18
+-- On typeexpr shift to state 22
+## Reductions:
+
+State 9:
+## Known stack suffix:
+## LPAREN LBRACKET
+## LR(1) items:
+typeexpr -> LPAREN LBRACKET . RBRACKET typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On RBRACKET shift to state 10
+## Reductions:
+
+State 10:
+## Known stack suffix:
+## LPAREN LBRACKET RBRACKET
+## LR(1) items:
+typeexpr -> LPAREN LBRACKET RBRACKET . typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 12
+## Reductions:
+
+State 11:
+## Known stack suffix:
+## IDENT
+## LR(1) items:
+typeexpr -> IDENT . [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+## Reductions:
+-- On TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT
+--   reduce production typeexpr -> IDENT
+
+State 12:
+## Known stack suffix:
+## LPAREN LBRACKET RBRACKET typeexpr
+## LR(1) items:
+typeexpr -> LPAREN LBRACKET RBRACKET typeexpr . RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On RPAREN shift to state 13
+## Reductions:
+
+State 13:
+## Known stack suffix:
+## LPAREN LBRACKET RBRACKET typeexpr RPAREN
+## LR(1) items:
+typeexpr -> LPAREN LBRACKET RBRACKET typeexpr RPAREN . [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+## Reductions:
+-- On TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT
+--   reduce production typeexpr -> LPAREN LBRACKET RBRACKET typeexpr RPAREN
+
+State 14:
+## Known stack suffix:
+## LPAREN COMMA
+## LR(1) items:
+typeexpr -> LPAREN COMMA . typeexpr typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 15
+## Reductions:
+
+State 15:
+## Known stack suffix:
+## LPAREN COMMA typeexpr
+## LR(1) items:
+typeexpr -> LPAREN COMMA typeexpr . typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 16
+## Reductions:
+
+State 16:
+## Known stack suffix:
+## LPAREN COMMA typeexpr typeexpr
+## LR(1) items:
+typeexpr -> LPAREN COMMA typeexpr typeexpr . RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On RPAREN shift to state 17
+## Reductions:
+
+State 17:
+## Known stack suffix:
+## LPAREN COMMA typeexpr typeexpr RPAREN
+## LR(1) items:
+typeexpr -> LPAREN COMMA typeexpr typeexpr RPAREN . [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+## Reductions:
+-- On TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT
+--   reduce production typeexpr -> LPAREN COMMA typeexpr typeexpr RPAREN
+
+State 18:
+## Known stack suffix:
+## LPAREN ARROW
+## LR(1) items:
+typeexpr -> LPAREN ARROW . typeexpr typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 19
+## Reductions:
+
+State 19:
+## Known stack suffix:
+## LPAREN ARROW typeexpr
+## LR(1) items:
+typeexpr -> LPAREN ARROW typeexpr . typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 20
+## Reductions:
+
+State 20:
+## Known stack suffix:
+## LPAREN ARROW typeexpr typeexpr
+## LR(1) items:
+typeexpr -> LPAREN ARROW typeexpr typeexpr . RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On RPAREN shift to state 21
+## Reductions:
+
+State 21:
+## Known stack suffix:
+## LPAREN ARROW typeexpr typeexpr RPAREN
+## LR(1) items:
+typeexpr -> LPAREN ARROW typeexpr typeexpr RPAREN . [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+## Reductions:
+-- On TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT
+--   reduce production typeexpr -> LPAREN ARROW typeexpr typeexpr RPAREN
+
+State 22:
+## Known stack suffix:
+## LPAREN typeexpr
+## LR(1) items:
+typeexpr -> LPAREN typeexpr . typeexpr RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+typeexpr -> LPAREN typeexpr . RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On RPAREN shift to state 23
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 24
+## Reductions:
+
+State 23:
+## Known stack suffix:
+## LPAREN typeexpr RPAREN
+## LR(1) items:
+typeexpr -> LPAREN typeexpr RPAREN . [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+## Reductions:
+-- On TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT
+--   reduce production typeexpr -> LPAREN typeexpr RPAREN
+
+State 24:
+## Known stack suffix:
+## LPAREN typeexpr typeexpr
+## LR(1) items:
+typeexpr -> LPAREN typeexpr typeexpr . RPAREN [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+-- On RPAREN shift to state 25
+## Reductions:
+
+State 25:
+## Known stack suffix:
+## LPAREN typeexpr typeexpr RPAREN
+## LR(1) items:
+typeexpr -> LPAREN typeexpr typeexpr RPAREN . [ TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ]
+## Transitions:
+## Reductions:
+-- On TRUE STRING_LIT RPAREN NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT
+--   reduce production typeexpr -> LPAREN typeexpr typeexpr RPAREN
+
+State 26:
+## Known stack suffix:
+## LPAREN IDENT typeexpr
+## LR(1) items:
+param -> LPAREN IDENT typeexpr . RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On RPAREN shift to state 27
+## Reductions:
+
+State 27:
+## Known stack suffix:
+## LPAREN IDENT typeexpr RPAREN
+## LR(1) items:
+param -> LPAREN IDENT typeexpr RPAREN . [ RPAREN LPAREN ]
+## Transitions:
+## Reductions:
+-- On RPAREN LPAREN
+--   reduce production param -> LPAREN IDENT typeexpr RPAREN
+
+State 28:
+## Known stack suffix:
+## param
+## LR(1) items:
+nonempty_list(param) -> param . [ RPAREN ]
+nonempty_list(param) -> param . nonempty_list(param) [ RPAREN ]
+## Transitions:
+-- On LPAREN shift to state 5
+-- On param shift to state 28
+-- On nonempty_list(param) shift to state 29
+## Reductions:
+-- On RPAREN
+--   reduce production nonempty_list(param) -> param
+
+State 29:
+## Known stack suffix:
+## param nonempty_list(param)
+## LR(1) items:
+nonempty_list(param) -> param nonempty_list(param) . [ RPAREN ]
+## Transitions:
+## Reductions:
+-- On RPAREN
+--   reduce production nonempty_list(param) -> param nonempty_list(param)
+
+State 30:
+## Known stack suffix:
+## LPAREN DEF IDENT LPAREN nonempty_list(param)
+## LR(1) items:
+defn -> LPAREN DEF IDENT LPAREN nonempty_list(param) . RPAREN typeexpr expr RPAREN [ LPAREN EOF ]
+## Transitions:
+-- On RPAREN shift to state 31
+## Reductions:
+
+State 31:
+## Known stack suffix:
+## LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN
+## LR(1) items:
+defn -> LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN . typeexpr expr RPAREN [ LPAREN EOF ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 32
+## Reductions:
+
+State 32:
+## Known stack suffix:
+## LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr
+## LR(1) items:
+defn -> LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr . expr RPAREN [ LPAREN EOF ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 104
+## Reductions:
+
+State 33:
+## Known stack suffix:
+## TRUE
+## LR(1) items:
+expr -> TRUE . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> TRUE
+
+State 34:
+## Known stack suffix:
+## STRING_LIT
+## LR(1) items:
+expr -> STRING_LIT . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> STRING_LIT
+
+State 35:
+## Known stack suffix:
+## NOT
+## LR(1) items:
+expr -> NOT . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 103
+## Reductions:
+
+State 36:
+## Known stack suffix:
+## LPAREN
+## LR(1) items:
+expr -> LPAREN . RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN . IF expr expr expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN . LET LPAREN list(letbinding) RPAREN expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN . expr expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN . expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On RPAREN shift to state 37
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LET shift to state 38
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IF shift to state 48
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 84
+## Reductions:
+
+State 37:
+## Known stack suffix:
+## LPAREN RPAREN
+## LR(1) items:
+expr -> LPAREN RPAREN . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> LPAREN RPAREN
+
+State 38:
+## Known stack suffix:
+## LPAREN LET
+## LR(1) items:
+expr -> LPAREN LET . LPAREN list(letbinding) RPAREN expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On LPAREN shift to state 39
+## Reductions:
+
+State 39:
+## Known stack suffix:
+## LPAREN LET LPAREN
+## LR(1) items:
+expr -> LPAREN LET LPAREN . list(letbinding) RPAREN expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On LPAREN shift to state 40
+-- On list(letbinding) shift to state 97
+-- On letbinding shift to state 101
+## Reductions:
+-- On RPAREN
+--   reduce production list(letbinding) ->
+
+State 40:
+## Known stack suffix:
+## LPAREN
+## LR(1) items:
+letbinding -> LPAREN . IDENT expr RPAREN [ RPAREN LPAREN ]
+letbinding -> LPAREN . IDENT LPAREN list(param) RPAREN typeexpr expr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On IDENT shift to state 41
+## Reductions:
+
+State 41:
+## Known stack suffix:
+## LPAREN IDENT
+## LR(1) items:
+letbinding -> LPAREN IDENT . expr RPAREN [ RPAREN LPAREN ]
+letbinding -> LPAREN IDENT . LPAREN list(param) RPAREN typeexpr expr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 42
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 95
+## Reductions:
+
+State 42:
+## Known stack suffix:
+## LPAREN IDENT LPAREN
+## LR(1) items:
+expr -> LPAREN . RPAREN [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> LPAREN . IF expr expr expr RPAREN [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> LPAREN . LET LPAREN list(letbinding) RPAREN expr RPAREN [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> LPAREN . expr expr RPAREN [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> LPAREN . expr RPAREN [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+letbinding -> LPAREN IDENT LPAREN . list(param) RPAREN typeexpr expr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On RPAREN shift to state 37
+-- On NOT shift to state 35
+-- On LPAREN shift to state 43
+-- On LET shift to state 38
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IF shift to state 48
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On param shift to state 88
+-- On list(param) shift to state 90
+-- On expr shift to state 84
+## Reductions:
+-- On RPAREN
+--   reduce production list(param) ->
+** Conflict on RPAREN
+
+State 43:
+## Known stack suffix:
+## LPAREN
+## LR(1) items:
+expr -> LPAREN . RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN . IF expr expr expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN . LET LPAREN list(letbinding) RPAREN expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN . expr expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN . expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+param -> LPAREN . RPAREN [ RPAREN LPAREN ]
+param -> LPAREN . IDENT typeexpr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On RPAREN shift to state 44
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LET shift to state 38
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IF shift to state 48
+-- On IDENT shift to state 83
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 84
+## Reductions:
+
+State 44:
+## Known stack suffix:
+## LPAREN RPAREN
+## LR(1) items:
+expr -> LPAREN RPAREN . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+param -> LPAREN RPAREN . [ RPAREN LPAREN ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> LPAREN RPAREN
+-- On RPAREN LPAREN
+--   reduce production param -> LPAREN RPAREN
+** Conflict on RPAREN LPAREN
+
+State 45:
+## Known stack suffix:
+## LBRACKET
+## LR(1) items:
+expr -> LBRACKET . RBRACKET [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On RBRACKET shift to state 46
+## Reductions:
+
+State 46:
+## Known stack suffix:
+## LBRACKET RBRACKET
+## LR(1) items:
+expr -> LBRACKET RBRACKET . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> LBRACKET RBRACKET
+
+State 47:
+## Known stack suffix:
+## INT_LIT
+## LR(1) items:
+expr -> INT_LIT . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> INT_LIT
+
+State 48:
+## Known stack suffix:
+## LPAREN IF
+## LR(1) items:
+expr -> LPAREN IF . expr expr expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 53
+## Reductions:
+
+State 49:
+## Known stack suffix:
+## IDENT
+## LR(1) items:
+expr -> IDENT . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> IDENT
+
+State 50:
+## Known stack suffix:
+## FLOAT_LIT
+## LR(1) items:
+expr -> FLOAT_LIT . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> FLOAT_LIT
+
+State 51:
+## Known stack suffix:
+## FALSE
+## LR(1) items:
+expr -> FALSE . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> FALSE
+
+State 52:
+## Known stack suffix:
+## CHAR_LIT
+## LR(1) items:
+expr -> CHAR_LIT . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> CHAR_LIT
+
+State 53:
+## Known stack suffix:
+## LPAREN IF expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN IF expr . expr expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On TIMES shift to state 54
+-- On STRING_LIT shift to state 34
+-- On PLUS shift to state 56
+-- On OROR shift to state 62
+-- On NOT shift to state 35
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LPAREN shift to state 36
+-- On LE shift to state 70
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On CHAR_LIT shift to state 52
+-- On ANDAND shift to state 78
+-- On expr shift to state 80
+## Reductions:
+
+State 54:
+## Known stack suffix:
+## expr TIMES
+## LR(1) items:
+expr -> expr TIMES . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 55
+## Reductions:
+
+State 55:
+## Known stack suffix:
+## expr TIMES expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr TIMES expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> expr TIMES expr
+
+State 56:
+## Known stack suffix:
+## expr PLUS
+## LR(1) items:
+expr -> expr PLUS . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 57
+## Reductions:
+
+State 57:
+## Known stack suffix:
+## expr PLUS expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr PLUS expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On MOD shift to state 58
+-- On DIV shift to state 60
+## Reductions:
+-- On TRUE STRING_LIT RPAREN PLUS OROR NOT NEQ MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ CHAR_LIT ANDAND
+--   reduce production expr -> expr PLUS expr
+
+State 58:
+## Known stack suffix:
+## expr MOD
+## LR(1) items:
+expr -> expr MOD . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 59
+## Reductions:
+
+State 59:
+## Known stack suffix:
+## expr MOD expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr MOD expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> expr MOD expr
+
+State 60:
+## Known stack suffix:
+## expr DIV
+## LR(1) items:
+expr -> expr DIV . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 61
+## Reductions:
+
+State 61:
+## Known stack suffix:
+## expr DIV expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr DIV expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> expr DIV expr
+
+State 62:
+## Known stack suffix:
+## expr OROR
+## LR(1) items:
+expr -> expr OROR . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 63
+## Reductions:
+
+State 63:
+## Known stack suffix:
+## expr OROR expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr OROR expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On PLUS shift to state 56
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LE shift to state 70
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On ANDAND shift to state 78
+## Reductions:
+-- On TRUE STRING_LIT RPAREN OROR NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT
+--   reduce production expr -> expr OROR expr
+
+State 64:
+## Known stack suffix:
+## expr NEQ
+## LR(1) items:
+expr -> expr NEQ . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 65
+## Reductions:
+
+State 65:
+## Known stack suffix:
+## expr NEQ expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr NEQ expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On PLUS shift to state 56
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On DIV shift to state 60
+## Reductions:
+-- On TRUE STRING_LIT RPAREN OROR NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ANDAND
+--   reduce production expr -> expr NEQ expr
+
+State 66:
+## Known stack suffix:
+## expr MINUS
+## LR(1) items:
+expr -> expr MINUS . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 67
+## Reductions:
+
+State 67:
+## Known stack suffix:
+## expr MINUS expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr MINUS expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On MOD shift to state 58
+-- On DIV shift to state 60
+## Reductions:
+-- On TRUE STRING_LIT RPAREN PLUS OROR NOT NEQ MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ CHAR_LIT ANDAND
+--   reduce production expr -> expr MINUS expr
+
+State 68:
+## Known stack suffix:
+## expr LT
+## LR(1) items:
+expr -> expr LT . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 69
+## Reductions:
+
+State 69:
+## Known stack suffix:
+## expr LT expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr LT expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On PLUS shift to state 56
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On DIV shift to state 60
+## Reductions:
+-- On TRUE STRING_LIT RPAREN OROR NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ANDAND
+--   reduce production expr -> expr LT expr
+
+State 70:
+## Known stack suffix:
+## expr LE
+## LR(1) items:
+expr -> expr LE . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 71
+## Reductions:
+
+State 71:
+## Known stack suffix:
+## expr LE expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr LE expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On PLUS shift to state 56
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On DIV shift to state 60
+## Reductions:
+-- On TRUE STRING_LIT RPAREN OROR NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ANDAND
+--   reduce production expr -> expr LE expr
+
+State 72:
+## Known stack suffix:
+## expr GT
+## LR(1) items:
+expr -> expr GT . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 73
+## Reductions:
+
+State 73:
+## Known stack suffix:
+## expr GT expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr GT expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On PLUS shift to state 56
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On DIV shift to state 60
+## Reductions:
+-- On TRUE STRING_LIT RPAREN OROR NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ANDAND
+--   reduce production expr -> expr GT expr
+
+State 74:
+## Known stack suffix:
+## expr GE
+## LR(1) items:
+expr -> expr GE . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 75
+## Reductions:
+
+State 75:
+## Known stack suffix:
+## expr GE expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr GE expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On PLUS shift to state 56
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On DIV shift to state 60
+## Reductions:
+-- On TRUE STRING_LIT RPAREN OROR NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ANDAND
+--   reduce production expr -> expr GE expr
+
+State 76:
+## Known stack suffix:
+## expr EQ
+## LR(1) items:
+expr -> expr EQ . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 77
+## Reductions:
+
+State 77:
+## Known stack suffix:
+## expr EQ expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr EQ expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On PLUS shift to state 56
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On DIV shift to state 60
+## Reductions:
+-- On TRUE STRING_LIT RPAREN OROR NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ANDAND
+--   reduce production expr -> expr EQ expr
+
+State 78:
+## Known stack suffix:
+## expr ANDAND
+## LR(1) items:
+expr -> expr ANDAND . expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 79
+## Reductions:
+
+State 79:
+## Known stack suffix:
+## expr ANDAND expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr ANDAND expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On PLUS shift to state 56
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LE shift to state 70
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+## Reductions:
+-- On TRUE STRING_LIT RPAREN OROR NOT LPAREN LBRACKET INT_LIT IDENT FLOAT_LIT FALSE CHAR_LIT ANDAND
+--   reduce production expr -> expr ANDAND expr
+
+State 80:
+## Known stack suffix:
+## LPAREN IF expr expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN IF expr expr . expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On TIMES shift to state 54
+-- On STRING_LIT shift to state 34
+-- On PLUS shift to state 56
+-- On OROR shift to state 62
+-- On NOT shift to state 35
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LPAREN shift to state 36
+-- On LE shift to state 70
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On CHAR_LIT shift to state 52
+-- On ANDAND shift to state 78
+-- On expr shift to state 81
+## Reductions:
+
+State 81:
+## Known stack suffix:
+## LPAREN IF expr expr expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MOD expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . OROR expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . ANDAND expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . EQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . NEQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> LPAREN IF expr expr expr . RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On RPAREN shift to state 82
+-- On PLUS shift to state 56
+-- On OROR shift to state 62
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LE shift to state 70
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On ANDAND shift to state 78
+## Reductions:
+
+State 82:
+## Known stack suffix:
+## LPAREN IF expr expr expr RPAREN
+## LR(1) items:
+expr -> LPAREN IF expr expr expr RPAREN . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> LPAREN IF expr expr expr RPAREN
+
+State 83:
+## Known stack suffix:
+## LPAREN IDENT
+## LR(1) items:
+expr -> IDENT . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+param -> LPAREN IDENT . typeexpr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 26
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> IDENT
+** Conflict on LPAREN IDENT
+
+State 84:
+## Known stack suffix:
+## LPAREN expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN expr . expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> LPAREN expr . RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On TIMES shift to state 54
+-- On STRING_LIT shift to state 34
+-- On RPAREN shift to state 85
+-- On PLUS shift to state 56
+-- On OROR shift to state 62
+-- On NOT shift to state 35
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LPAREN shift to state 36
+-- On LE shift to state 70
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On CHAR_LIT shift to state 52
+-- On ANDAND shift to state 78
+-- On expr shift to state 86
+## Reductions:
+
+State 85:
+## Known stack suffix:
+## LPAREN expr RPAREN
+## LR(1) items:
+expr -> LPAREN expr RPAREN . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> LPAREN expr RPAREN
+
+State 86:
+## Known stack suffix:
+## LPAREN expr expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MOD expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . OROR expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . ANDAND expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . EQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . NEQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> LPAREN expr expr . RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On RPAREN shift to state 87
+-- On PLUS shift to state 56
+-- On OROR shift to state 62
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LE shift to state 70
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On ANDAND shift to state 78
+## Reductions:
+
+State 87:
+## Known stack suffix:
+## LPAREN expr expr RPAREN
+## LR(1) items:
+expr -> LPAREN expr expr RPAREN . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> LPAREN expr expr RPAREN
+
+State 88:
+## Known stack suffix:
+## param
+## LR(1) items:
+list(param) -> param . list(param) [ RPAREN ]
+## Transitions:
+-- On LPAREN shift to state 5
+-- On param shift to state 88
+-- On list(param) shift to state 89
+## Reductions:
+-- On RPAREN
+--   reduce production list(param) ->
+
+State 89:
+## Known stack suffix:
+## param list(param)
+## LR(1) items:
+list(param) -> param list(param) . [ RPAREN ]
+## Transitions:
+## Reductions:
+-- On RPAREN
+--   reduce production list(param) -> param list(param)
+
+State 90:
+## Known stack suffix:
+## LPAREN IDENT LPAREN list(param)
+## LR(1) items:
+letbinding -> LPAREN IDENT LPAREN list(param) . RPAREN typeexpr expr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On RPAREN shift to state 91
+## Reductions:
+
+State 91:
+## Known stack suffix:
+## LPAREN IDENT LPAREN list(param) RPAREN
+## LR(1) items:
+letbinding -> LPAREN IDENT LPAREN list(param) RPAREN . typeexpr expr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On LPAREN shift to state 8
+-- On IDENT shift to state 11
+-- On typeexpr shift to state 92
+## Reductions:
+
+State 92:
+## Known stack suffix:
+## LPAREN IDENT LPAREN list(param) RPAREN typeexpr
+## LR(1) items:
+letbinding -> LPAREN IDENT LPAREN list(param) RPAREN typeexpr . expr RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 93
+## Reductions:
+
+State 93:
+## Known stack suffix:
+## LPAREN IDENT LPAREN list(param) RPAREN typeexpr expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MOD expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . OROR expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . ANDAND expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . EQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . NEQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+letbinding -> LPAREN IDENT LPAREN list(param) RPAREN typeexpr expr . RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On RPAREN shift to state 94
+-- On PLUS shift to state 56
+-- On OROR shift to state 62
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LE shift to state 70
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On ANDAND shift to state 78
+## Reductions:
+
+State 94:
+## Known stack suffix:
+## LPAREN IDENT LPAREN list(param) RPAREN typeexpr expr RPAREN
+## LR(1) items:
+letbinding -> LPAREN IDENT LPAREN list(param) RPAREN typeexpr expr RPAREN . [ RPAREN LPAREN ]
+## Transitions:
+## Reductions:
+-- On RPAREN LPAREN
+--   reduce production letbinding -> LPAREN IDENT LPAREN list(param) RPAREN typeexpr expr RPAREN
+
+State 95:
+## Known stack suffix:
+## LPAREN IDENT expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MOD expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . OROR expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . ANDAND expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . EQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . NEQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+letbinding -> LPAREN IDENT expr . RPAREN [ RPAREN LPAREN ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On RPAREN shift to state 96
+-- On PLUS shift to state 56
+-- On OROR shift to state 62
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LE shift to state 70
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On ANDAND shift to state 78
+## Reductions:
+
+State 96:
+## Known stack suffix:
+## LPAREN IDENT expr RPAREN
+## LR(1) items:
+letbinding -> LPAREN IDENT expr RPAREN . [ RPAREN LPAREN ]
+## Transitions:
+## Reductions:
+-- On RPAREN LPAREN
+--   reduce production letbinding -> LPAREN IDENT expr RPAREN
+
+State 97:
+## Known stack suffix:
+## LPAREN LET LPAREN list(letbinding)
+## LR(1) items:
+expr -> LPAREN LET LPAREN list(letbinding) . RPAREN expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On RPAREN shift to state 98
+## Reductions:
+
+State 98:
+## Known stack suffix:
+## LPAREN LET LPAREN list(letbinding) RPAREN
+## LR(1) items:
+expr -> LPAREN LET LPAREN list(letbinding) RPAREN . expr RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TRUE shift to state 33
+-- On STRING_LIT shift to state 34
+-- On NOT shift to state 35
+-- On LPAREN shift to state 36
+-- On LBRACKET shift to state 45
+-- On INT_LIT shift to state 47
+-- On IDENT shift to state 49
+-- On FLOAT_LIT shift to state 50
+-- On FALSE shift to state 51
+-- On CHAR_LIT shift to state 52
+-- On expr shift to state 99
+## Reductions:
+
+State 99:
+## Known stack suffix:
+## LPAREN LET LPAREN list(letbinding) RPAREN expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MOD expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . OROR expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . ANDAND expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . EQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . NEQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> LPAREN LET LPAREN list(letbinding) RPAREN expr . RPAREN [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On RPAREN shift to state 100
+-- On PLUS shift to state 56
+-- On OROR shift to state 62
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LE shift to state 70
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On ANDAND shift to state 78
+## Reductions:
+
+State 100:
+## Known stack suffix:
+## LPAREN LET LPAREN list(letbinding) RPAREN expr RPAREN
+## LR(1) items:
+expr -> LPAREN LET LPAREN list(letbinding) RPAREN expr RPAREN . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> LPAREN LET LPAREN list(letbinding) RPAREN expr RPAREN
+
+State 101:
+## Known stack suffix:
+## letbinding
+## LR(1) items:
+list(letbinding) -> letbinding . list(letbinding) [ RPAREN ]
+## Transitions:
+-- On LPAREN shift to state 40
+-- On list(letbinding) shift to state 102
+-- On letbinding shift to state 101
+## Reductions:
+-- On RPAREN
+--   reduce production list(letbinding) ->
+
+State 102:
+## Known stack suffix:
+## letbinding list(letbinding)
+## LR(1) items:
+list(letbinding) -> letbinding list(letbinding) . [ RPAREN ]
+## Transitions:
+## Reductions:
+-- On RPAREN
+--   reduce production list(letbinding) -> letbinding list(letbinding)
+
+State 103:
+## Known stack suffix:
+## NOT expr
+## LR(1) items:
+expr -> expr . PLUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MINUS expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . TIMES expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . DIV expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . MOD expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . OROR expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . ANDAND expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . EQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . NEQ expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GT expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . LE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> expr . GE expr [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+expr -> NOT expr . [ TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND ]
+## Transitions:
+## Reductions:
+-- On TRUE TIMES STRING_LIT RPAREN PLUS OROR NOT NEQ MOD MINUS LT LPAREN LE LBRACKET INT_LIT IDENT GT GE FLOAT_LIT FALSE EQ DIV CHAR_LIT ANDAND
+--   reduce production expr -> NOT expr
+
+State 104:
+## Known stack suffix:
+## LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr
+## LR(1) items:
+defn -> LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr . RPAREN [ LPAREN EOF ]
+expr -> expr . PLUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MINUS expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . TIMES expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . DIV expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . MOD expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . OROR expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . ANDAND expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . EQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . NEQ expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GT expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . LE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+expr -> expr . GE expr [ TIMES RPAREN PLUS OROR NEQ MOD MINUS LT LE GT GE EQ DIV ANDAND ]
+## Transitions:
+-- On TIMES shift to state 54
+-- On RPAREN shift to state 105
+-- On PLUS shift to state 56
+-- On OROR shift to state 62
+-- On NEQ shift to state 64
+-- On MOD shift to state 58
+-- On MINUS shift to state 66
+-- On LT shift to state 68
+-- On LE shift to state 70
+-- On GT shift to state 72
+-- On GE shift to state 74
+-- On EQ shift to state 76
+-- On DIV shift to state 60
+-- On ANDAND shift to state 78
+## Reductions:
+
+State 105:
+## Known stack suffix:
+## LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr RPAREN
+## LR(1) items:
+defn -> LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr RPAREN . [ LPAREN EOF ]
+## Transitions:
+## Reductions:
+-- On LPAREN EOF
+--   reduce production defn -> LPAREN DEF IDENT LPAREN nonempty_list(param) RPAREN typeexpr expr RPAREN
+
+State 106:
+## Known stack suffix:
+## start
+## LR(1) items:
+start' -> start . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   accept start
+
+State 107:
+## Known stack suffix:
+## prog
+## LR(1) items:
+start -> prog . EOF [ # ]
+## Transitions:
+-- On EOF shift to state 108
+## Reductions:
+
+State 108:
+## Known stack suffix:
+## prog EOF
+## LR(1) items:
+start -> prog EOF . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   reduce production start -> prog EOF
+
+State 109:
+## Known stack suffix:
+## list(defn)
+## LR(1) items:
+prog -> list(defn) . [ EOF ]
+## Transitions:
+## Reductions:
+-- On EOF
+--   reduce production prog -> list(defn)
+
+State 110:
+## Known stack suffix:
+## defn
+## LR(1) items:
+list(defn) -> defn . list(defn) [ EOF ]
+## Transitions:
+-- On LPAREN shift to state 1
+-- On list(defn) shift to state 111
+-- On defn shift to state 110
+## Reductions:
+-- On EOF
+--   reduce production list(defn) ->
+
+State 111:
+## Known stack suffix:
+## defn list(defn)
+## LR(1) items:
+list(defn) -> defn list(defn) . [ EOF ]
+## Transitions:
+## Reductions:
+-- On EOF
+--   reduce production list(defn) -> defn list(defn)
+

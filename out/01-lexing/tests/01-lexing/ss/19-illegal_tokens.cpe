@@ -1,0 +1,4 @@
+Int(1)
+Sym(+)
+Int(2)
+Error("@", "tests/01-lexing/ss/19-illegal_tokens.cpe", 1, 6)

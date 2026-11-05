@@ -1,0 +1,19 @@
+import test
+import test as namespace
+
+def main
+
+data Tree
+type Number
+
+let x = 10
+and y = 20
+in x
+
+if True then x else y
+
+match x with
+| 0 -> 1
+| n -> n
+
+with

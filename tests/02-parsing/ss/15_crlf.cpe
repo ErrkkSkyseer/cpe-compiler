@@ -1,0 +1,4 @@
+def f (x : Integer) : Integer =
+  x + 1
+
+def g : Integer = 2

@@ -1,0 +1,12 @@
+Sym(()
+Sym())
+Sym([)
+Sym(])
+Sym(,)
+Sym(:)
+Sym(.)
+Sym(|)
+Sym(=)
+Sym($)
+Sym(!)
+EOF

@@ -1,0 +1,7 @@
+(() (
+(def a () Integer 1)
+(def b () Integer 2)
+(def c () Integer (+ 1 2))
+(def d () Integer 3)
+(def e () Integer 4)
+(def f ((x Integer) (y Integer)) Integer (+ x y))))
