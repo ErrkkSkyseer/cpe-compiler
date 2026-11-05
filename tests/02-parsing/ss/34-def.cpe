@@ -1,0 +1,6 @@
+# ---- def ----
+[def-spec-example]    prog: def f (x : Integer) (y : Integer) : Integer = (2 + x) * y ==> (() ((def f ((x Integer) (y Integer)) Integer (* (+ 2 x) y))))
+[def-variable]        prog: def x : Integer = 1 ==> (() ((def x () Integer 1)))
+[def-unit-param]      prog: def bot () : Integer = 1 ==> (() ((def bot (()) Integer 1)))
+[def-two-defs]        prog: def a : Integer = 1 def b : Integer = 2 ==> (() ((def a () Integer 1) (def b () Integer 2)))
+[def-match-body]      prog: def not (b : Bool) : Bool = match b with | False -> True | True -> False ==> (() ((def not ((b Bool)) Bool (match b ((-> False True) (-> True False))))))

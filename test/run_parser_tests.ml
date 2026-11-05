@@ -8,6 +8,7 @@ let parse_lb kind lb =
   | "type"    -> Ast.string_of_typeexpr (Parser.type_entry Lexer.read lb)
   | "param"   -> Ast.string_of_param (Parser.param_entry Lexer.read lb)
   | "pattern" -> Ast.string_of_pattern (Parser.pattern_entry Lexer.read lb)
+  | "prog" -> Ast.string_of_prog (Parser.start Lexer.read lb)
   | k -> failwith ("unknown kind: " ^ k)
 
 let col (p : Lexing.position) = p.pos_cnum - p.pos_bol

@@ -4,12 +4,8 @@ exception SyntaxError of string * Lexing.position
 let error msg lexbuf = raise (SyntaxError (msg, Lexing.lexeme_start_p lexbuf))
 
 let keywords = Hashtbl.create 16
-(* let () = List.iter (fun (k, t) -> Hashtbl.add keywords k t)
-  [ "def", DEF; "import", IMPORT; "as", AS; "data", DATA; "type", TYPE;
-    "match", MATCH; "with", WITH; "let", LET; "and", AND; "in", IN;
-    "if", IF; "then", THEN; "else", ELSE ] *)
 let () = List.iter (fun (k, t) -> Hashtbl.add keywords k t)
-  [ "if", IF; "then", THEN; "else", ELSE; "let", LET; "and", AND; "in", IN; "match", MATCH; "with", WITH ]
+  [ "if", IF; "then", THEN; "else", ELSE; "let", LET; "and", AND; "in", IN; "match", MATCH; "with", WITH; "import", IMPORT; "as", AS; "data", DATA; "type", TYPE; "def", DEF ]
 
 let int_lit s lexbuf =
   match int_of_string_opt s with

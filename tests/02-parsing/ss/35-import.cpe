@@ -1,0 +1,4 @@
+# ---- import ----
+[import-plain]        prog: import utils def x : Integer = 1 ==> (((import utils)) ((def x () Integer 1)))
+[import-namespace]    prog: import utils as lib def x : Integer = 1 ==> (((import utils lib)) ((def x () Integer 1)))
+[import-two]          prog: import a import b as c def x : Integer = 1 ==> (((import a) (import b c)) ((def x () Integer 1)))

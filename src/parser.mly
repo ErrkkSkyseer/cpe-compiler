@@ -7,14 +7,14 @@ open Ast
 
 (* token declarations *)
 //-------------------- keywords --------------------
-// %token IMPORT "import"
-// %token DEF "def"
-// %token TYPE "type"
+%token IMPORT "import"
+%token DEF "def"
+%token TYPE "type"
 %token IF "if"
 %token ELSE "else"
 %token WITH "with"
-// %token AS "as"
-// %token DATA "data"
+%token AS "as"
+%token DATA "data"
 %token LET "let"
 %token IN "in"
 %token THEN "then"
@@ -56,7 +56,6 @@ open Ast
 %token BAR "|"
 %token COLON ":"
 %token COMMA ","
-// %token EXC "!" 
 %token BACKSLASH "\\"
 %token LPAREN "("
 %token RPAREN ")"
@@ -111,23 +110,40 @@ expr_entry:
 type_entry:
   | t = typeexpr; EOF { t }
 
-  param_entry:
-    | p = param; EOF { p }
+param_entry:
+  | p = param; EOF { p }
 
-  pattern_entry:
-    | p = pattern; EOF { p }
+pattern_entry:
+  | p = pattern; EOF { p }
 
-// //-------------------- program --------------------
+//-------------------- program --------------------
 prog:
-  | e = expr
-    { { imports = [];
-        defns = [ Def {
-          pos = $loc;
-          name = "test";
-          params = [];
-          return_type = TypeVar { pos = $loc; name = "_" };
-          body = e
-        } ] } }
+  | is = list(import_decl); ds = list(defn)
+      { { imports = is; defns = ds } }
+
+//-------------------- import declarations --------------------
+import_decl:
+  | IMPORT; f = IDENT
+      { { imp_pos = $loc; imp_name = f; namespace = None } }
+  | IMPORT; f = IDENT; AS; ns = IDENT
+      { { imp_pos = $loc; imp_name = f; namespace = Some ns } }
+
+//-------------------- definitions --------------------
+defn:
+  | DEF; x = IDENT; ps = list(param); COLON; t = typeexpr; ASSIGN; b = expr
+      { Def { pos = $loc; name = x; params = ps; return_type = t; body = b } }
+  | DATA; d = typedecl; ASSIGN; cs = separated_nonempty_list(BAR, constructor)
+      { Data { pos = $loc; decl = d; constructors = cs } }
+  | TYPE; d = typedecl; ASSIGN; t = typeexpr
+      { TypeSyn { pos = $loc; decl = d; body = t } }
+
+typedecl:
+  | n = UIDENT; ps = list(IDENT)
+      { { td_name = n; td_params = ps } }
+
+constructor:
+  | c = UIDENT; args = list(type_atom) //ต้องมีวงเล็บครอบ
+      { { con_name = c; con_args = args } }
 
 //-------------------- expressions --------------------
 expr:
@@ -322,8 +338,8 @@ eq_expr:
     | t = type_atom { t }
 
     type_atom:
-    | x = IDENT   { TypeVar { pos = $loc; name = x } } // variable identifiers
-    | x = UIDENT  { TypeVar { pos = $loc; name = x } } // type identifiers
+    | x = IDENT   { TypeVar { pos = $loc; name = x } } // type identifiers
+    | x = UIDENT  { TypeVar { pos = $loc; name = x } } // variable identifiers
     | LBRACKET; t = typeexpr; RBRACKET
         { ListType { pos = $loc; elem = t } }
     | LPAREN; l = typeexpr; COMMA; r = typeexpr; RPAREN
