@@ -48,7 +48,7 @@ rule read = parse
   | '\'' '\\' (_ as c) '\''                      { CHAR_LIT (unescape lexbuf c) }
   | '"'                    { string (Buffer.create 16) lexbuf }
   | "->" { ARROW } 
-  (* | "=>" { FATARROW } *)
+  | "=>" { FATARROW }
   | "==" { EQ } | "!=" { NEQ } | "<=" { LE } | ">=" { GE }
   | "<" { LT } | ">" { GT } 
   | "=" { ASSIGN }
@@ -59,7 +59,7 @@ rule read = parse
   | "+" { PLUS } | "-" { MINUS } | "*" { TIMES }
   | "//" { IDIV } | "/" { DIV } | "%" { MOD }
   | "." { DOT } | "$" { DOLLAR } 
-  (* | "\\" { BACKSLASH }  *)
+  | "\\" { BACKSLASH } 
   (* | "|" { BAR } *)
   | "," { COMMA } | "(" { LPAREN } | ")" { RPAREN }
   | "[" { LBRACKET } | "]" { RBRACKET }

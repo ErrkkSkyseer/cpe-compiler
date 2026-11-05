@@ -1,0 +1,6 @@
+[lam-simple]          expr: \ (x : Integer) : Integer => x + 1 ==> (\ ((x Integer)) Integer (+ x 1))
+[lam-two-params]      expr: \ (acc : [a]) (x : a) : [a] => x::acc ==> (\ ((acc ([] a)) (x a)) ([] a) (:: x acc))
+[lam-unit-param]      expr: \ () : Integer => 1 ==> (\ (()) Integer 1)
+[lam-func-type]       expr: \ (f : a -> b) : b => f x ==> (\ ((f (-> a b))) b (f x))
+[lam-in-parens-arg]   expr: map (\ (x : a) : a => x) xs ==> ((map (\ ((x a)) a x)) xs)
+[lam-nested-body]     expr: \ (x : a) : a => if x then x else x ==> (\ ((x a)) a (if x x x))

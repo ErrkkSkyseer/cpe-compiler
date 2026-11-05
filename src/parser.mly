@@ -42,7 +42,7 @@ open Ast
 %token CONS "::"
 %token APPEND "++"
 %token ARROW "->"
-// %token FATARROW "=>"
+%token FATARROW "=>"
 %token PLUS "+" 
 %token MINUS "-"
 %token TIMES "*"
@@ -57,7 +57,7 @@ open Ast
 %token COLON ":"
 %token COMMA ","
 // %token EXC "!" 
-// %token BACKSLASH "\\"
+%token BACKSLASH "\\"
 %token LPAREN "("
 %token RPAREN ")"
 %token LBRACKET "["
@@ -141,11 +141,12 @@ prog:
 //-------------------- expressions --------------------
 expr:
   | e = let_expr    { e }
-  // | e = lambda_expr { e }
+  | e = lambda_expr { e }
   // | e = match_expr  { e }
   | e = if_expr     { e }
   | e = dollar_expr { e }
 
+//-------------------- let expressions --------------------
 let_expr:
   | LET; bs = separated_nonempty_list(AND, letbinding); IN; b = expr
       { LetExpr { prop = (); pos = $loc; bindings = bs; body = b } }
@@ -156,6 +157,12 @@ letbinding:
   | x = IDENT; ps = nonempty_list(param); COLON; t = typeexpr; ASSIGN; b = expr
       { LetFunction { pos = $loc; name = x; params = ps; return_type = t; body = b } }
 
+//-------------------- lambda expressions --------------------
+lambda_expr: 
+  | BACKSLASH; ps = nonempty_list(param); COLON; t = typeexpr; FATARROW; b = expr
+      { Lambda { prop = (); pos = $loc; params = ps; return_type = t; body = b } }
+
+//-------------------- if expressions --------------------
 if_expr:
   | IF; c = expr; THEN; t = expr; ELSE; e = expr
     { IfExpr {
