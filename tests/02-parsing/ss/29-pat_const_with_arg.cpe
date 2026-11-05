@@ -1,0 +1,7 @@
+# ---- constructor with arguments ----
+[pat-con-args]        pattern: Node v l r ==> (Node v l r)
+[pat-con-one-arg]     pattern: Just x ==> (Just x)
+[pat-con-nested]      pattern: Node v (Node a b c) r ==> (Node v (Node a b c) r)
+[pat-con-paren-nullary] pattern: Node v (Leaf) r ==> (Node v Leaf r)
+[pat-con-in-cons]     pattern: Node a b :: rest ==> (:: (Node a b) rest)
+[pat-paren]           pattern: (hd::tl) ==> (:: hd tl)

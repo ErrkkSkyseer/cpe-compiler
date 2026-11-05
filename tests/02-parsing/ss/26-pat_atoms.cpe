@@ -1,0 +1,12 @@
+# ---- atoms ----
+[pat-wildcard]        pattern: _ ==> _
+[pat-var]             pattern: x ==> x
+[pat-constructor]     pattern: Leaf ==> Leaf
+[pat-true]            pattern: True ==> True
+[pat-false]           pattern: False ==> False
+[pat-int]             pattern: 42 ==> 42
+[pat-char]            pattern: 'a' ==> 'a'
+[pat-string]          pattern: "hi" ==> "hi"
+[pat-empty-string]    pattern: "" ==> ""
+[pat-unit]            pattern: () ==> ()
+[pat-nil]             pattern: [] ==> []

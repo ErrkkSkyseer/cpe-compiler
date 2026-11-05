@@ -1,0 +1,5 @@
+# ---- data ----
+[data-tree]           prog: data Tree a = Leaf | Node a (Tree a) (Tree a) ==> (() ((data (Tree a) (Leaf (Node a (Tree a) (Tree a))))))
+[data-no-params]      prog: data IntList = EmptyIntList | ConsIntList Integer IntList ==> (() ((data IntList (EmptyIntList (ConsIntList Integer IntList)))))
+[data-two-params]     prog: data Either a b = Left a | Right b ==> (() ((data (Either a b) ((Left a) (Right b)))))
+[data-same-name]      prog: data Box a = Box a ==> (() ((data (Box a) ((Box a)))))

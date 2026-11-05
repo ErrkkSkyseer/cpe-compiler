@@ -1,0 +1,5 @@
+# ---- cons ----
+[pat-cons]            pattern: hd::tl ==> (:: hd tl)
+[pat-cons-right]      pattern: x1::x2::xs ==> (:: x1 (:: x2 xs))
+[pat-cons-nil]        pattern: hd::[] ==> (:: hd [])
+[pat-cons-wildcards]  pattern: _::_ ==> (:: _ _)
