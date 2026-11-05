@@ -39,12 +39,14 @@ type param =
 type unop = Neg
 
 type op =
+  (* Number *)
   | Add 
   | Sub 
   | Mult 
   | Div 
-  | IDiv 
   | Mod
+  | IDiv 
+  (* Boolean *)
   | LOr 
   | LAnd
   | Eq 
@@ -53,8 +55,10 @@ type op =
   | Gt 
   | Le 
   | Ge
+  (* List *)
   | Cons 
   | Append 
+  (* Function *)
   | Compose 
   | Apply
 
